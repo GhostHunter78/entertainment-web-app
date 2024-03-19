@@ -21,10 +21,14 @@ body {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   background-color: #10141e;
 }
 
 .outfit {
   font-family: "Outfit", sans-serif;
+}
+
+.red-cursor {
+  caret-color: #fc4747;
 }
