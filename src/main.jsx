@@ -1,13 +1,37 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./style.css";
-import { BrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import Header from "./Layouts/Header";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Registration from "./Pages/Registration";
+
+// Layout component to conditionally render the Header
+const Layout = () => {
+  const currentPath = window.location.pathname;
+  const isLoginPage = currentPath === "/" || currentPath === "/registration";
+
+  return (
+    <>
+      {!isLoginPage && <Header />} <Outlet />
+    </>
+  );
+};
+
+// Create the router configuration
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { path: "/", element: <Login /> },
+      { path: "registration", element: <Registration /> },
+      { path: "home", element: <Home /> },
+    ],
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );
