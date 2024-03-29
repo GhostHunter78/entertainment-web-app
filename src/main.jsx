@@ -6,6 +6,7 @@ import Header from "./Layouts/Header";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Registration from "./Pages/Registration";
+import Footer from "./Layouts/Footer";
 
 // Layout component to conditionally render the Header
 const Layout = () => {
@@ -14,7 +15,7 @@ const Layout = () => {
 
   return (
     <>
-      {!isLoginPage && <Header />} <Outlet />
+      {!isLoginPage && <Header />} <Outlet /> {!isLoginPage && <Footer />}
     </>
   );
 };

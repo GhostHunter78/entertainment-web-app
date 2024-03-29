@@ -1,6 +1,11 @@
 export { default as SearchField } from "./SearchField";
 export { default as TrendingMovies } from "./TrendingMovies";
+export { default as TrendingSeries } from "./TrendingSeries";
 export { default as PopularMovies } from "./PopularMovies";
+export { default as PopularSeries } from "./PopularSeries";
 export { default as NowPlaying } from "./NowPlaying";
 export { default as Upcoming } from "./Upcoming";
 export { default as TopRated } from "./TopRated";
+export { default as AiringToday } from "./AiringToday";
+export { default as OnAir } from "./OnAir";
+export { default as TopRatedSeries } from "./TopRatedSeries";
