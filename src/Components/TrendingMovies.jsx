@@ -13,7 +13,6 @@ function TrendingMovies() {
       }
       const data = await response.json();
       setTrendingData(data.results);
-      console.log(data.results);
     } catch (error) {
       console.error("Error fetching trending movies:", error);
     }
