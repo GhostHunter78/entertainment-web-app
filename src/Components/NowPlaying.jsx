@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 
-function PopularMovies() {
-  const [popularData, setPopularData] = useState(null);
+function NowPlaying() {
+  const [nowPlayingData, setNowPlayingData] = useState(null);
 
-  const getPopularMovies = async () => {
+  const getNowPlaying = async () => {
     try {
       const response = await fetch(
-        "https://api.themoviedb.org/3/movie/popular?api_key=399464050f3fe0a143819e2d3fa3f29b"
+        "https://api.themoviedb.org/3/movie/now_playing?api_key=399464050f3fe0a143819e2d3fa3f29b"
       );
       if (!response.ok) {
-        throw new Error(`Error fetching popular movies: ${response.status}`);
+        throw new Error(`Error fetching nowPlaying movies: ${response.status}`);
       }
       const data = await response.json();
-      setPopularData(data.results);
+      setNowPlayingData(data.results);
     } catch (error) {
-      console.error("Error fetching popular movies:", error);
+      console.error("Error fetching nowPlaying movies:", error);
     }
   };
 
   useEffect(() => {
-    getPopularMovies();
+    getNowPlaying();
   }, []);
   return (
-    <div className="mt-6 w-screen px-4">
+    <div className="mt-10 w-screen px-4">
       <div className="flex flex-row items-center w-full justify-between">
         <div className="flex items-center gap-[8px]">
-          <p className="outfit text-white text-[20px]">Popular</p>
+          <p className="outfit text-white text-[20px]">Now Playing</p>
           <p className="rounded-md border-2 py-1 px-2 text-[8px] text-white font-medium">
             MOVIE
           </p>
@@ -34,10 +34,10 @@ function PopularMovies() {
           SEE MORE
         </p>
       </div>
-      {popularData && (
+      {nowPlayingData && (
         <>
           <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
-            {popularData.slice(0, 6).map((movie, index) => (
+            {nowPlayingData.slice(0, 6).map((movie, index) => (
               <div key={index} className="relative">
                 <div className="h-[133px] overflow-hidden rounded-lg">
                   <img
@@ -82,4 +82,4 @@ function PopularMovies() {
   );
 }
 
-export default PopularMovies;
+export default NowPlaying;
