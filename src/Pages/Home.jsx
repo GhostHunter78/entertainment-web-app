@@ -1,12 +1,14 @@
+import PopularMovies from "../Components/PopularMovies";
 import SearchField from "../Components/SearchField";
-import MoviesData from "../Components/MoviesData";
+import TrendingMovies from "../Components/TrendingMovies";
 
 const Home = () => {
   return (
     <>
       <div className="text-white">
         <SearchField />
-        <MoviesData />
+        <TrendingMovies />
+        <PopularMovies />
       </div>
     </>
   );
