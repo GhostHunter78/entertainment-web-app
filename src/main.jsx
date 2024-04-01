@@ -7,6 +7,8 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Registration from "./Pages/Registration";
 import Footer from "./Layouts/Footer";
+import MovieGenres from "./Pages/MovieGenres";
+import SeriesGenres from "./Pages/SeriesGenres";
 
 // Layout component to conditionally render the Header
 const Layout = () => {
@@ -29,6 +31,8 @@ const router = createBrowserRouter([
       { path: "/", element: <Login /> },
       { path: "registration", element: <Registration /> },
       { path: "home", element: <Home /> },
+      { path: "movie-genres", element: <MovieGenres /> },
+      { path: "series-genres", element: <SeriesGenres /> },
     ],
   },
 ]);

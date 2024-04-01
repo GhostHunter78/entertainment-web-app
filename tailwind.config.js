@@ -13,6 +13,8 @@ export default {
         red: "#fc4747",
         BgBody: "#10141e",
         seeMore: "hsl(223 23% 46%/ 1)",
+        genreBlue: "#055488",
+        genreGreen: "#078978",
       },
     },
   },
