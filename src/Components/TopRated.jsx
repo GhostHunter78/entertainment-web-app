@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function TopRated() {
+function TopRated({ currentPathName, currentPage }) {
   const [topRatedData, setTopRatedData] = useState(null);
 
   const getTopRated = async () => {
@@ -25,14 +26,16 @@ function TopRated() {
     <div className="mt-10 w-screen px-4">
       <div className="flex flex-row items-center w-full justify-between">
         <div className="flex items-center gap-[8px]">
-          <p className="outfit text-white text-[20px]">TopRated</p>
+          <p className="outfit text-white text-[20px]">Top Rated</p>
           <p className="rounded-md border-2 py-1 px-2 text-[8px] text-white font-medium">
             MOVIE
           </p>
         </div>
-        <p className="text-xs font-semibold outfit text-seeMore hover:underline">
-          SEE MORE
-        </p>
+        <Link to={`/${currentPathName}/movies/${currentPage}`}>
+          <p className="text-xs font-semibold outfit text-seeMore hover:underline">
+            SEE MORE
+          </p>
+        </Link>
       </div>
       {topRatedData && (
         <>

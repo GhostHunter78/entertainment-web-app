@@ -17,7 +17,7 @@ function SeriesGenres() {
       .then((response) => response.json())
       .then((response) => {
         setSeriesGenres(response.genres);
-        console.log(response);
+        // console.log(response);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -36,7 +36,7 @@ function SeriesGenres() {
     options
   )
     .then((response) => response.json())
-    .then((response) => console.log(response))
+    // .then((response) => console.log(response))
     .catch((err) => console.error(err));
 
   return (

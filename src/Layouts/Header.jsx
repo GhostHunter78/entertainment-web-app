@@ -3,9 +3,14 @@ import IconHome from "../SVGs/IconHome";
 import IconMovies from "../SVGs/IconMovies";
 import IconSeries from "../SVGs/IconSeries";
 import IconBookmark from "../SVGs/IconBookmark";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
+
+  // Extract the page name from the pathname
+  const currentPage = location.pathname;
+
   return (
     <>
       <div className="w-screen bg-blue px-4 py-4 flex items-center justify-between">
@@ -14,17 +19,17 @@ const Header = () => {
         </Link>
         <div className="flex items-center gap-6">
           <Link to={"/home"}>
-            <IconHome />
+            <IconHome activePage={currentPage} />
           </Link>
           <Link to={"/movie-genres"}>
-            <IconMovies />
+            <IconMovies activePage={currentPage} />
           </Link>
           <Link to={"/series-genres"}>
-            <IconSeries />
+            <IconSeries activePage={currentPage} />
           </Link>
           <IconBookmark />
         </div>
-        <img src="./assets/icons/icon-avatar.png" />
+        <img src="/assets/icons/icon-avatar.png" />
       </div>
     </>
   );

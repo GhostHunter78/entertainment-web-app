@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function Upcoming() {
+function Upcoming({ currentPathName, currentPage }) {
   const [upcomingData, setUpcomingData] = useState(null);
 
   const getUpcoming = async () => {
-    try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/movie/upcoming?api_key=399464050f3fe0a143819e2d3fa3f29b"
-      );
-      if (!response.ok) {
-        throw new Error(`Error fetching upcoming movies: ${response.status}`);
-      }
-      const data = await response.json();
-      setUpcomingData(data.results);
-    } catch (error) {
-      console.error("Error fetching upcoming movies:", error);
-    }
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTk0NjQwNTBmM2ZlMGExNDM4MTllMmQzZmEzZjI5YiIsInN1YiI6IjY1ZjlhNGM1MDdlMjgxMDE2M2MxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mBDpl5xXooR_Ko0TQpZUSpRRujp4pLxUAnKPjWKOBYw",
+      },
+    };
+
+    fetch(
+      "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => setUpcomingData(response.results))
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -30,9 +35,11 @@ function Upcoming() {
             MOVIE
           </p>
         </div>
-        <p className="text-xs font-semibold outfit text-seeMore hover:underline">
-          SEE MORE
-        </p>
+        <Link to={`/${currentPathName}/movies/${currentPage}`}>
+          <p className="text-xs font-semibold outfit text-seeMore hover:underline">
+            SEE MORE
+          </p>
+        </Link>
       </div>
       {upcomingData && (
         <>

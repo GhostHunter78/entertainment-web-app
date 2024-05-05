@@ -15,6 +15,8 @@ export default {
         seeMore: "hsl(223 23% 46%/ 1)",
         genreBlue: "#055488",
         genreGreen: "#078978",
+        iconRed: "#d63f3f",
+        iconGray: "#5A698F",
       },
     },
   },

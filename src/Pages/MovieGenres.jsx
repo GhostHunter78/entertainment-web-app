@@ -27,7 +27,6 @@ function MovieGenres() {
         {movieGenres &&
           movieGenres.map((genre, index, array) => {
             if (index + 1 === array.length) {
-              console.log(index, array.length, "hellow");
               return (
                 <a
                   key={genre.id}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function TrendingMovies() {
+function TrendingMovies({ currentPathName, currentPage }) {
   const [trendingData, setTrendingData] = useState(null);
 
   const getTrendingMovies = async () => {
@@ -31,9 +32,11 @@ function TrendingMovies() {
             MOVIE
           </p>
         </div>
-        <p className="text-xs font-semibold outfit text-seeMore hover:underline">
-          SEE MORE
-        </p>
+        <Link to={`/${currentPathName}/movies/${currentPage}`}>
+          <p className="text-xs font-semibold outfit text-seeMore hover:underline">
+            SEE MORE
+          </p>
+        </Link>
       </div>
       {trendingData && (
         <>

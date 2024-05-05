@@ -12,16 +12,19 @@ import {
   TopRatedSeries,
 } from "../Components";
 
-const Home = () => {
+const Home = ({ currentPage, currentPathName }) => {
   return (
     <>
       <div className="text-white">
         <SearchField />
-        <TrendingMovies />
-        <PopularMovies />
-        <NowPlaying />
-        <Upcoming />
-        <TopRated />
+        <TrendingMovies
+          currentPathName={"trending"}
+          currentPage={currentPage}
+        />
+        <PopularMovies currentPathName={"popular"} currentPage={currentPage} />
+        <NowPlaying currentPathName={"now_playing"} currentPage={currentPage} />
+        <Upcoming currentPathName={"upcoming"} currentPage={currentPage} />
+        <TopRated currentPathName={"top_rated"} currentPage={currentPage} />
         <TrendingSeries />
         <PopularSeries />
         <AiringToday />

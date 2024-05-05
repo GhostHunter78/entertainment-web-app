@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./style.css";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Outlet,
+  RouterProvider,
+  createBrowserRouter,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import Header from "./Layouts/Header";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -9,34 +15,62 @@ import Registration from "./Pages/Registration";
 import Footer from "./Layouts/Footer";
 import MovieGenres from "./Pages/MovieGenres";
 import SeriesGenres from "./Pages/SeriesGenres";
+import PopularMoviesPage from "./Pages/PopularMoviesPage";
 
-// Layout component to conditionally render the Header
+// Layout component to render the Header and Footer
 const Layout = () => {
-  const currentPath = window.location.pathname;
-  const isLoginPage = currentPath === "/" || currentPath === "/registration";
-
   return (
     <>
-      {!isLoginPage && <Header />} <Outlet /> {!isLoginPage && <Footer />}
+      <Header />
+      <Outlet />
+      <Footer />
     </>
   );
 };
 
-// Create the router configuration
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      { path: "/", element: <Login /> },
-      { path: "registration", element: <Registration /> },
-      { path: "home", element: <Home /> },
-      { path: "movie-genres", element: <MovieGenres /> },
-      { path: "series-genres", element: <SeriesGenres /> },
-    ],
-  },
-]);
+const App = () => {
+  // State for currentPage
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPathName, setCurrentPathName] = useState("");
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
-);
+  // let currentPathName = "";
+
+  // Create the router configuration
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        { path: "/", element: <Login /> },
+        { path: "registration", element: <Registration /> },
+        {
+          path: "home",
+          element: (
+            <Home
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              currentPathName={currentPathName}
+            />
+          ),
+        },
+        { path: "movie-genres", element: <MovieGenres /> },
+        { path: "series-genres", element: <SeriesGenres /> },
+        // Passing currentPage as a prop to PopularMoviesPage
+        {
+          path: `:currentPathname/movies/:currentPage`,
+          element: (
+            <PopularMoviesPage
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              setCurrentPathName={setCurrentPathName}
+            />
+          ),
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
