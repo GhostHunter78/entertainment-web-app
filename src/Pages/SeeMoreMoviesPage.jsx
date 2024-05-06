@@ -3,15 +3,18 @@ import { SearchField } from "../Components";
 import { ImArrowLeft2 } from "react-icons/im";
 import { ImArrowRight2 } from "react-icons/im";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-function PopularMoviesPage({
+function SeeMoreMoviesPage({
   currentPage,
   setCurrentPage,
   setCurrentPathName,
+  movieOrTv,
+  setMovieOrTv,
 }) {
   const [popularData, setPopularData] = useState(null);
   const [trendingData, setTrendingData] = useState(null);
 
   const params = useParams();
+  console.log(params);
   const navigate = useNavigate();
   const location = useLocation();
   const firstPart = location.pathname.split("/");
@@ -38,17 +41,17 @@ function PopularMoviesPage({
     const nextPage =
       parseInt(currentPage, 10) < 500 ? parseInt(currentPage, 10) + 1 : 500;
     setCurrentPage(nextPage);
-    navigate(`/${apiAddress}/movies/${nextPage}`);
+    navigate(`/${apiAddress}/${movieOrTv}/${nextPage}`);
   };
 
   const handlePrevButtonClick = () => {
     const prevPage =
       parseInt(currentPage, 10) > 1 ? parseInt(currentPage, 10) - 1 : 1;
     setCurrentPage(prevPage);
-    navigate(`/${apiAddress}/movies/${prevPage}`);
+    navigate(`/${apiAddress}/${movieOrTv}/${prevPage}`);
   };
 
-  const getPopularMoviesPage = async () => {
+  const getSeeMoreMoviesPage = async () => {
     const options = {
       method: "GET",
       headers: {
@@ -59,7 +62,7 @@ function PopularMoviesPage({
     };
 
     fetch(
-      `https://api.themoviedb.org/3/movie/${apiAddress}?language=en-US&page=${currentPage}`,
+      `https://api.themoviedb.org/3/${movieOrTv}/${apiAddress}?language=en-US&page=${currentPage}`,
       options
     )
       .then((response) => response.json())
@@ -78,7 +81,7 @@ function PopularMoviesPage({
     };
 
     fetch(
-      "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
+      `https://api.themoviedb.org/3/trending/${movieOrTv}/day?language=en-US`,
       options
     )
       .then((response) => response.json())
@@ -89,12 +92,13 @@ function PopularMoviesPage({
   useEffect(() => {
     setCurrentPage(params.currentPage);
     setCurrentPathName(params.apiAddress);
-  }, []);
+    setMovieOrTv(params.movieOrTv);
+  }, [movieOrTv]);
 
   useEffect(() => {
-    getPopularMoviesPage();
+    getSeeMoreMoviesPage();
     getTrendingMoviesPage();
-    navigate(`/${apiAddress}/movies/${currentPage}`);
+    navigate(`/${apiAddress}/${movieOrTv}/${currentPage}`);
   }, [currentPage, apiAddress]);
 
   return (
@@ -219,4 +223,4 @@ function PopularMoviesPage({
   );
 }
 
-export default PopularMoviesPage;
+export default SeeMoreMoviesPage;

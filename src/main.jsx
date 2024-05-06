@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./style.css";
-import {
-  Outlet,
-  RouterProvider,
-  createBrowserRouter,
-  useLocation,
-  useParams,
-} from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Header from "./Layouts/Header";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -15,7 +9,7 @@ import Registration from "./Pages/Registration";
 import Footer from "./Layouts/Footer";
 import MovieGenres from "./Pages/MovieGenres";
 import SeriesGenres from "./Pages/SeriesGenres";
-import PopularMoviesPage from "./Pages/PopularMoviesPage";
+import SeeMoreMoviesPage from "./Pages/SeeMoreMoviesPage";
 
 // Layout component to render the Header and Footer
 const Layout = () => {
@@ -32,8 +26,7 @@ const App = () => {
   // State for currentPage
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPathName, setCurrentPathName] = useState("");
-
-  // let currentPathName = "";
+  const [movieOrTv, setMovieOrTv] = useState("");
 
   // Create the router configuration
   const router = createBrowserRouter([
@@ -50,6 +43,8 @@ const App = () => {
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               currentPathName={currentPathName}
+              movieOrTv={movieOrTv}
+              setMovieOrTv={setMovieOrTv}
             />
           ),
         },
@@ -57,12 +52,14 @@ const App = () => {
         { path: "series-genres", element: <SeriesGenres /> },
         // Passing currentPage as a prop to PopularMoviesPage
         {
-          path: `:currentPathname/movies/:currentPage`,
+          path: `:currentPathname/:movieOrTv/:currentPage`,
           element: (
-            <PopularMoviesPage
+            <SeeMoreMoviesPage
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               setCurrentPathName={setCurrentPathName}
+              movieOrTv={movieOrTv}
+              setMovieOrTv={setMovieOrTv}
             />
           ),
         },
