@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Upcoming({ currentPathName, currentPage }) {
+function Upcoming({ currentPathName, currentPage, movieOrTv }) {
   const [upcomingData, setUpcomingData] = useState(null);
 
   const getUpcoming = async () => {
@@ -35,7 +35,7 @@ function Upcoming({ currentPathName, currentPage }) {
             MOVIE
           </p>
         </div>
-        <Link to={`/${currentPathName}/movies/${currentPage}`}>
+        <Link to={`/${currentPathName}/${movieOrTv}/${currentPage}`}>
           <p className="text-xs font-semibold outfit text-seeMore hover:underline">
             SEE MORE
           </p>

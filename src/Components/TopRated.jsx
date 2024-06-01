@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function TopRated({ currentPathName, currentPage }) {
+function TopRated({ currentPathName, currentPage, movieOrTv }) {
   const [topRatedData, setTopRatedData] = useState(null);
 
   const getTopRated = async () => {
@@ -31,7 +31,7 @@ function TopRated({ currentPathName, currentPage }) {
             MOVIE
           </p>
         </div>
-        <Link to={`/${currentPathName}/movies/${currentPage}`}>
+        <Link to={`/${currentPathName}/${movieOrTv}/${currentPage}`}>
           <p className="text-xs font-semibold outfit text-seeMore hover:underline">
             SEE MORE
           </p>

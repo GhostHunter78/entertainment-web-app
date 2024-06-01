@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function NowPlaying({ currentPathName, currentPage }) {
+function NowPlaying({ currentPathName, currentPage, movieOrTv }) {
   const [nowPlayingData, setNowPlayingData] = useState(null);
 
   const getNowPlaying = async () => {
@@ -35,7 +35,7 @@ function NowPlaying({ currentPathName, currentPage }) {
             MOVIE
           </p>
         </div>
-        <Link to={`/${currentPathName}/movies/${currentPage}`}>
+        <Link to={`/${currentPathName}/${movieOrTv}/${currentPage}`}>
           <p className="text-xs font-semibold outfit text-seeMore hover:underline">
             SEE MORE
           </p>

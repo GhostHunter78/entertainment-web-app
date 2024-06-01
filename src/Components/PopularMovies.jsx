@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function PopularMovies({ currentPage, currentPathName }) {
+function PopularMovies({ currentPage, currentPathName, movieOrTv }) {
   const [popularData, setPopularData] = useState(null);
 
   const getPopularMovies = async () => {
@@ -26,6 +26,7 @@ function PopularMovies({ currentPage, currentPathName }) {
   useEffect(() => {
     getPopularMovies();
   }, []);
+
   return (
     <div className="mt-6 w-screen px-4">
       <div className="flex flex-row items-center w-full justify-between">
@@ -35,7 +36,7 @@ function PopularMovies({ currentPage, currentPathName }) {
             MOVIE
           </p>
         </div>
-        <Link to={`/${currentPathName}/movies/${currentPage}`}>
+        <Link to={`/${currentPathName}/${movieOrTv}/${currentPage}`}>
           <p className="text-xs font-semibold outfit text-seeMore hover:underline">
             SEE MORE
           </p>

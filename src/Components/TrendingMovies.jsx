@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 function TrendingMovies({ currentPathName, currentPage, movieOrTv }) {
   const [trendingData, setTrendingData] = useState(null);
-  console.log(movieOrTv);
 
   const getTrendingMovies = async () => {
     try {
@@ -23,6 +22,8 @@ function TrendingMovies({ currentPathName, currentPage, movieOrTv }) {
   useEffect(() => {
     getTrendingMovies();
   }, []);
+
+  localStorage.getItem("movieOrTv");
 
   return (
     <div className="mt-6 w-screen px-4">

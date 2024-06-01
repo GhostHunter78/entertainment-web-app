@@ -26,7 +26,11 @@ const App = () => {
   // State for currentPage
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPathName, setCurrentPathName] = useState("");
-  const [movieOrTv, setMovieOrTv] = useState("");
+  const [movieOrTv, setMovieOrTv] = useState("movie");
+
+  localStorage.setItem("movieOrTv", movieOrTv);
+  localStorage.setItem("currentPathName", currentPathName);
+  localStorage.setItem("currentPage", currentPage);
 
   // Create the router configuration
   const router = createBrowserRouter([

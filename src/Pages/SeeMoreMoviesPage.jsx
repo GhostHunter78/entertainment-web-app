@@ -3,6 +3,8 @@ import { SearchField } from "../Components";
 import { ImArrowLeft2 } from "react-icons/im";
 import { ImArrowRight2 } from "react-icons/im";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+
 function SeeMoreMoviesPage({
   currentPage,
   setCurrentPage,
@@ -14,29 +16,40 @@ function SeeMoreMoviesPage({
   const [trendingData, setTrendingData] = useState(null);
 
   const params = useParams();
-  console.log(params);
   const navigate = useNavigate();
   const location = useLocation();
   const firstPart = location.pathname.split("/");
   const apiAddress = firstPart[1];
 
+  const pathnameParts = location.pathname.split("/");
+  const mediaType = pathnameParts[2];
+  const combinedPath = `${apiAddress}/${mediaType}`;
+
+  localStorage.getItem("movieOrTv");
+  localStorage.getItem("currentPathName");
+
   const movieCategory = () => {
-    if (apiAddress === "popular") {
-      return "popular";
-    } else if (apiAddress === "now_playing") {
-      return "now playing";
-    } else if (apiAddress === "upcoming") {
-      return "upcoming";
-    } else if (apiAddress === "top_rated") {
-      return "top rated";
-    } else if (apiAddress === "trending") {
-      return "trending";
-    } else {
-      return null;
+    switch (apiAddress) {
+      case "popular":
+        return "popular";
+      case "now_playing":
+        return "now playing";
+      case "upcoming":
+        return "upcoming";
+      case "top_rated":
+        return "top rated";
+      case "trending":
+        return "trending";
+      case "airing_today":
+        return "airing today";
+      case "on_the_air":
+        return "on the air";
+      default:
+        return null;
     }
   };
 
-  // assuring that current page value is actually number and not string by using parseInt
+  // Handle page change
   const handleNextButtonClick = () => {
     const nextPage =
       parseInt(currentPage, 10) < 500 ? parseInt(currentPage, 10) + 1 : 500;
@@ -52,61 +65,61 @@ function SeeMoreMoviesPage({
   };
 
   const getSeeMoreMoviesPage = async () => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTk0NjQwNTBmM2ZlMGExNDM4MTllMmQzZmEzZjI5YiIsInN1YiI6IjY1ZjlhNGM1MDdlMjgxMDE2M2MxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mBDpl5xXooR_Ko0TQpZUSpRRujp4pLxUAnKPjWKOBYw",
-      },
-    };
-
-    fetch(
-      `https://api.themoviedb.org/3/${movieOrTv}/${apiAddress}?language=en-US&page=${currentPage}`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setPopularData(response.results))
-      .catch((err) => console.error(err));
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/${movieOrTv}/${apiAddress}?language=en-US&page=${currentPage}`,
+        {
+          headers: {
+            accept: "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTk0NjQwNTBmM2ZlMGExNDM4MTllMmQzZmEzZjI5YiIsInN1YiI6IjY1ZjlhNGM1MDdlMjgxMDE2M2MxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mBDpl5xXooR_Ko0TQpZUSpRRujp4pLxUAnKPjWKOBYw",
+          },
+        }
+      );
+      setPopularData(response.data.results);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const getTrendingMoviesPage = async () => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTk0NjQwNTBmM2ZlMGExNDM4MTllMmQzZmEzZjI5YiIsInN1YiI6IjY1ZjlhNGM1MDdlMjgxMDE2M2MxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mBDpl5xXooR_Ko0TQpZUSpRRujp4pLxUAnKPjWKOBYw",
-      },
-    };
-
-    fetch(
-      `https://api.themoviedb.org/3/trending/${movieOrTv}/day?language=en-US`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setTrendingData(response.results))
-      .catch((err) => console.error(err));
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/${combinedPath}/day?language=en-US`,
+        {
+          headers: {
+            accept: "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTk0NjQwNTBmM2ZlMGExNDM4MTllMmQzZmEzZjI5YiIsInN1YiI6IjY1ZjlhNGM1MDdlMjgxMDE2M2MxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mBDpl5xXooR_Ko0TQpZUSpRRujp4pLxUAnKPjWKOBYw",
+          },
+        }
+      );
+      setTrendingData(response.data.results);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
     setCurrentPage(params.currentPage);
     setCurrentPathName(params.apiAddress);
     setMovieOrTv(params.movieOrTv);
-  }, [movieOrTv]);
+    getSeeMoreMoviesPage();
+    if (apiAddress === "trending") {
+      getTrendingMoviesPage();
+    }
+  }, [params.currentPage, params.apiAddress, params.movieOrTv]);
 
   useEffect(() => {
     getSeeMoreMoviesPage();
-    getTrendingMoviesPage();
-    navigate(`/${apiAddress}/${movieOrTv}/${currentPage}`);
-  }, [currentPage, apiAddress]);
+  }, [currentPage]);
 
   return (
     <div className="w-screen text-white">
       <SearchField />
       <div className="px-4">
         <p className="text-white text-[20px] mt-4 capitalize">
-          {movieCategory()} Movies
+          {movieCategory()} {movieOrTv === "movie" ? "Movies" : "TV Series"}
         </p>
         {apiAddress === "trending"
           ? trendingData && (
@@ -127,8 +140,11 @@ function SeeMoreMoviesPage({
                       <div className="mt-2 w-full">
                         <div className="mb-1 flex text-[11px] font-light items-center">
                           <p>
-                            {movie.release_date &&
-                              movie.release_date.substring(0, 4)}
+                            {movieOrTv === "movie"
+                              ? movie.release_date &&
+                                movie.release_date.substring(0, 4)
+                              : movie.first_air_date &&
+                                movie.first_air_date.substring(0, 4)}
                           </p>
                           <div className="bg-white rounded-full w-[2px] h-[2px] ml-2"></div>
                           <svg
@@ -143,10 +159,12 @@ function SeeMoreMoviesPage({
                               opacity=".75"
                             />
                           </svg>
-                          <p className="ml-2 capitalize">Movie</p>
+                          <p className="ml-2 capitalize">
+                            {movieOrTv === "movie" ? "Movie" : "TV"}
+                          </p>
                         </div>
                         <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white">
-                          {movie.title}
+                          {movieOrTv === "movie" ? movie.title : movie.name}
                         </p>
                       </div>
                     </div>
@@ -172,8 +190,11 @@ function SeeMoreMoviesPage({
                       <div className="mt-2 w-full">
                         <div className="mb-1 flex text-[11px] font-light items-center">
                           <p>
-                            {movie.release_date &&
-                              movie.release_date.substring(0, 4)}
+                            {movieOrTv === "movie"
+                              ? movie.release_date &&
+                                movie.release_date.substring(0, 4)
+                              : movie.first_air_date &&
+                                movie.first_air_date.substring(0, 4)}
                           </p>
                           <div className="bg-white rounded-full w-[2px] h-[2px] ml-2"></div>
                           <svg
@@ -188,10 +209,14 @@ function SeeMoreMoviesPage({
                               opacity=".75"
                             />
                           </svg>
-                          <p className="ml-2 capitalize">Movie</p>
+                          <p className="ml-2 capitalize">
+                            {movieOrTv === "movie" ? "Movie" : "TV"}
+                          </p>
                         </div>
                         <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white">
-                          {movie.title}
+                          {movieOrTv === "movie"
+                            ? movie.original_title
+                            : movie.name}
                         </p>
                       </div>
                     </div>

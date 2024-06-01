@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function AiringToday() {
+function AiringToday({ currentPathName, currentPage, movieOrTv }) {
   const [airingData, setAiringData] = useState(null);
 
   const getAiringToday = async () => {
@@ -23,6 +24,8 @@ function AiringToday() {
   useEffect(() => {
     getAiringToday();
   }, []);
+
+  localStorage.getItem("movieOrTv");
   return (
     <div className="mt-6 w-screen px-4">
       <div className="flex flex-row items-center w-full justify-between">
@@ -32,9 +35,11 @@ function AiringToday() {
             TV SERIES
           </p>
         </div>
-        <p className="text-xs font-semibold outfit text-seeMore hover:underline">
-          SEE MORE
-        </p>
+        <Link to={`/${currentPathName}/${movieOrTv}/${currentPage}`}>
+          <p className="text-xs font-semibold outfit text-seeMore hover:underline">
+            SEE MORE
+          </p>
+        </Link>
       </div>
       {airingData && (
         <>

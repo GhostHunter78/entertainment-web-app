@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function PopularSeries() {
+function PopularSeries({ currentPathName, currentPage, movieOrTv }) {
   const [popularData, setPopularData] = useState(null);
 
   const getPopularSeries = async () => {
@@ -30,9 +31,11 @@ function PopularSeries() {
             TV SERIES
           </p>
         </div>
-        <p className="text-xs font-semibold outfit text-seeMore hover:underline">
-          SEE MORE
-        </p>
+        <Link to={`/${currentPathName}/${movieOrTv}/${currentPage}`}>
+          <p className="text-xs font-semibold outfit text-seeMore hover:underline">
+            SEE MORE
+          </p>
+        </Link>
       </div>
       {popularData && (
         <>
