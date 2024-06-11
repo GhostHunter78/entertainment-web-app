@@ -15,6 +15,8 @@ function SeeMoreMoviesPage({
   const [popularData, setPopularData] = useState(null);
   const [trendingData, setTrendingData] = useState(null);
 
+  console.log(popularData);
+
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();

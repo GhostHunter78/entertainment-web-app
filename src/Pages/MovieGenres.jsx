@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function MovieGenres() {
+function MovieGenres({ currentPage }) {
   const [movieGenres, setMovieGenres] = useState([]);
+  const navigate = useNavigate();
+
+  const handleGenreClick = (genreId) => {
+    navigate(`/genre/${genreId}/${currentPage}`);
+  };
 
   useEffect(() => {
     const options = {
@@ -30,7 +36,8 @@ function MovieGenres() {
               return (
                 <a
                   key={genre.id}
-                  className="col-span-full m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreBlue"
+                  onClick={() => handleGenreClick(genre.id)}
+                  className="col-span-full m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreBlue cursor-pointer"
                 >
                   {genre.name}
                 </a>
@@ -39,7 +46,8 @@ function MovieGenres() {
               return (
                 <a
                   key={genre.id}
-                  className="m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreBlue"
+                  onClick={() => handleGenreClick(genre.id)}
+                  className="m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreBlue cursor-pointer"
                 >
                   {genre.name}
                 </a>
