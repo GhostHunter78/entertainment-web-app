@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function SeriesGenres() {
+function SeriesGenres({ currentPage }) {
   const [seriesGenres, setSeriesGenres] = useState([]);
+  const navigate = useNavigate();
+
+  const handleGenreClick = (genreId) => {
+    navigate(`/series/genre/${genreId}/${currentPage}`);
+  };
 
   useEffect(() => {
-    //   const options = {
-    //     method: "GET",
-    //     headers: {
-    //       accept: "application/json",
-    //       Authorization:
-    //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTk0NjQwNTBmM2ZlMGExNDM4MTllMmQzZmEzZjI5YiIsInN1YiI6IjY1ZjlhNGM1MDdlMjgxMDE2M2MxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mBDpl5xXooR_Ko0TQpZUSpRRujp4pLxUAnKPjWKOBYw",
-    //     },
-    //   };
-
     fetch("https://api.themoviedb.org/3/genre/tv/list?language=en", options)
       .then((response) => response.json())
       .then((response) => {
         setSeriesGenres(response.genres);
-        // console.log(response);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -36,7 +32,6 @@ function SeriesGenres() {
     options
   )
     .then((response) => response.json())
-    // .then((response) => console.log(response))
     .catch((err) => console.error(err));
 
   return (
@@ -48,6 +43,7 @@ function SeriesGenres() {
               return (
                 <a
                   key={genre.id}
+                  onClick={() => handleGenreClick(genre.id)}
                   className="col-span-full m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreGreen"
                 >
                   {genre.name}
@@ -57,6 +53,7 @@ function SeriesGenres() {
               return (
                 <a
                   key={genre.id}
+                  onClick={() => handleGenreClick(genre.id)}
                   className="m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreGreen"
                 >
                   {genre.name}

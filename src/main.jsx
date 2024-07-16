@@ -11,6 +11,7 @@ import MovieGenres from "./Pages/MovieGenres";
 import SeriesGenres from "./Pages/SeriesGenres";
 import SeeMoreMoviesPage from "./Pages/SeeMoreMoviesPage";
 import MoviesByGenre from "./Pages/MoviesByGenres";
+import SeriesByGenre from "./Pages/SeriesByGenres";
 
 // Layout component to render the Header and Footer
 const Layout = () => {
@@ -64,7 +65,7 @@ const App = () => {
           ),
         },
         {
-          path: "genre/:genreId/:currentPage",
+          path: "movies/genre/:genreId/:currentPage",
           element: (
             <MoviesByGenre
               currentPage={currentPage}
@@ -73,8 +74,27 @@ const App = () => {
             />
           ),
         },
-        { path: "series-genres", element: <SeriesGenres /> },
-        // Passing currentPage as a prop to PopularMoviesPage
+        {
+          path: "series-genres",
+          element: (
+            <SeriesGenres
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              setCurrentPathName={setCurrentPathName}
+            />
+          ),
+        },
+        {
+          path: "series/genre/:genreId/:currentPage",
+          element: (
+            <SeriesByGenre
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              setCurrentPathName={setCurrentPathName}
+            />
+          ),
+        },
+        // Passing currentPage as a prop to PopularMoviesPages
         {
           path: `:currentPathname/:movieOrTv/:currentPage`,
           element: (

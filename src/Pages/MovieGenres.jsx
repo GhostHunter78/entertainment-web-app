@@ -6,7 +6,7 @@ function MovieGenres({ currentPage }) {
   const navigate = useNavigate();
 
   const handleGenreClick = (genreId) => {
-    navigate(`/genre/${genreId}/${currentPage}`);
+    navigate(`/movies/genre/${genreId}/${currentPage}`);
   };
 
   useEffect(() => {

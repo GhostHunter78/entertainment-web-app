@@ -3,20 +3,17 @@ import { ImArrowLeft2, ImArrowRight2 } from "react-icons/im";
 import { useNavigate, useParams } from "react-router-dom";
 import { SearchField } from "../Components";
 
-function MoviesByGenre({ currentPage, setCurrentPage }) {
+function SeriesByGenre({ currentPage, setCurrentPage }) {
   const { genreId } = useParams();
-  const [movies, setMovies] = useState([]);
+  const [series, setSeries] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   let genreName = "";
 
   switch (genreId) {
-    case "28":
-      genreName = "Action";
-      break;
-    case "12":
-      genreName = "Adventure";
+    case "10759":
+      genreName = "Action & Adventure";
       break;
     case "16":
       genreName = "Animation";
@@ -36,38 +33,29 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
     case "10751":
       genreName = "Family";
       break;
-    case "14":
-      genreName = "Fantasy";
-      break;
-    case "36":
-      genreName = "History";
-      break;
-    case "16":
-      genreName = "Animation";
-      break;
-    case "27":
-      genreName = "Horror";
-      break;
-    case "10402":
-      genreName = "Music";
+    case "10762":
+      genreName = "kids";
       break;
     case "9648":
       genreName = "Mystery";
       break;
-    case "10749":
-      genreName = "Romance";
+    case "10763":
+      genreName = "News";
       break;
-    case "878":
-      genreName = "Science Fiction";
+    case "10764":
+      genreName = "Reality";
       break;
-    case "10770":
-      genreName = "TV Movie";
+    case "10765":
+      genreName = "Sci-Fi & Fantasy";
       break;
-    case "53":
-      genreName = "Thriller";
+    case "10766":
+      genreName = "Soap";
       break;
-    case "10752":
-      genreName = "War";
+    case "10767":
+      genreName = "Talk";
+      break;
+    case "10768":
+      genreName = "War & Politics";
       break;
     case "37":
       genreName = "Western";
@@ -80,18 +68,18 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
     const nextPage =
       parseInt(currentPage, 10) < 500 ? parseInt(currentPage, 10) + 1 : 500;
     setCurrentPage(nextPage);
-    navigate(`/movies/genre/${genreId}/${nextPage}`);
+    navigate(`/series/genre/${genreId}/${nextPage}`);
   };
 
   const handlePrevButtonClick = () => {
     const prevPage =
       parseInt(currentPage, 10) > 1 ? parseInt(currentPage, 10) - 1 : 1;
     setCurrentPage(prevPage);
-    navigate(`/movies/genre/${genreId}/${prevPage}`);
+    navigate(`/series/genre/${genreId}/${prevPage}`);
   };
 
   useEffect(() => {
-    const fetchMoviesByGenre = async () => {
+    const fetchSeriesByGenre = async () => {
       const options = {
         method: "GET",
         headers: {
@@ -103,61 +91,59 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
 
       try {
         setLoading(true);
-
         const [
-          popularMoviesResponse,
-          nowPlayingMoviesResponse,
-          topRatedMoviesResponse,
-          upcomingMoviesResponse,
+          popularSeriesResponse,
+          onAirSeriesResponse,
+          topRatedSeriesResponse,
+          airingTodaySeriesResponse,
         ] = await Promise.all([
           fetch(
-            `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${currentPage}`,
+            `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${currentPage}`,
             options
           ),
           fetch(
-            `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${currentPage}`,
+            `https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=${currentPage}`,
             options
           ),
           fetch(
-            `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${currentPage}`,
+            `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${currentPage}`,
             options
           ),
           fetch(
-            `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${currentPage}`,
+            `https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${currentPage}`,
             options
           ),
         ]);
 
         if (
-          !popularMoviesResponse.ok ||
-          !nowPlayingMoviesResponse.ok ||
-          !topRatedMoviesResponse.ok ||
-          !upcomingMoviesResponse.ok
+          !popularSeriesResponse.ok ||
+          !onAirSeriesResponse.ok ||
+          !topRatedSeriesResponse.ok ||
+          !airingTodaySeriesResponse.ok
         ) {
           throw new Error("Failed to fetch data");
         }
 
-        const popularMoviesData = await popularMoviesResponse.json();
-        const nowPlayingMoviesData = await nowPlayingMoviesResponse.json();
-        const topRatedMoviesData = await topRatedMoviesResponse.json();
-        const upcomingMoviesData = await upcomingMoviesResponse.json();
+        const popularSeriesData = await popularSeriesResponse.json();
+        const onAirSeriesData = await onAirSeriesResponse.json();
+        const topRatedSeriesData = await topRatedSeriesResponse.json();
+        const airingTodaySeriesData = await airingTodaySeriesResponse.json();
 
-        const combinedMovies = [
-          ...popularMoviesData?.results,
-          ...nowPlayingMoviesData?.results,
-          ...topRatedMoviesData?.results,
-          ...upcomingMoviesData?.results,
+        const combinedSeries = [
+          ...popularSeriesData?.results,
+          ...onAirSeriesData?.results,
+          ...topRatedSeriesData?.results,
+          ...airingTodaySeriesData?.results,
         ];
 
-        const uniqueMovies = Array.from(
-          new Map(combinedMovies.map((movie) => [movie.id, movie])).values()
+        const uniqueSeries = Array.from(
+          new Map(combinedSeries.map((movie) => [movie.id, movie])).values()
         );
 
-        const filteredMovies = uniqueMovies.filter((movie) =>
+        const filteredSeries = uniqueSeries.filter((movie) =>
           movie.genre_ids.includes(parseInt(genreId, 10))
         );
-
-        setMovies(filteredMovies);
+        setSeries(filteredSeries);
       } catch (error) {
         console.error(error);
       } finally {
@@ -165,7 +151,7 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
       }
     };
 
-    fetchMoviesByGenre();
+    fetchSeriesByGenre();
   }, [genreId, currentPage]);
 
   if (loading) return <div>Loading...</div>;
@@ -176,27 +162,27 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
       <div className="w-full text-white px-4">
         <h1 className="text-left text-3xl">{genreName}</h1>
         <div className="flex flex-col grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-          {movies.length > 0 && (
+          {series.length > 0 && (
             <>
               <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
-                {movies.slice(0, 20).map((movie, index) => (
+                {series.slice(0, 20).map((series, index) => (
                   <div key={index} className="relative">
                     <div className="h-[133px] overflow-hidden rounded-lg">
                       <img
                         src={`${
-                          movie.backdrop_path
-                            ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+                          series.backdrop_path
+                            ? `https://image.tmdb.org/t/p/w500${series.backdrop_path}`
                             : "none"
                         }`}
-                        alt={`Movie Poster: ${movie.title || "Unknown"}`}
+                        alt={`series Poster: ${series.name || "Unknown"}`}
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="mt-2 w-full">
                       <div className="mb-1 flex text-[11px] font-light items-center">
                         <p>
-                          {movie.release_date &&
-                            movie.release_date.substring(0, 4)}
+                          {series.first_air_date &&
+                            series.first_air_date.substring(0, 4)}
                         </p>
                         <div className="bg-white rounded-full w-[2px] h-[2px] ml-2"></div>
                         <svg
@@ -211,10 +197,10 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
                             opacity=".75"
                           />
                         </svg>
-                        <p className="ml-2 capitalize">Movie</p>
+                        <p className="ml-2 capitalize">TV</p>
                       </div>
                       <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white">
-                        {movie.original_title}
+                        {series.name}
                       </p>
                     </div>
                   </div>
@@ -247,4 +233,4 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
   );
 }
 
-export default MoviesByGenre;
+export default SeriesByGenre;
