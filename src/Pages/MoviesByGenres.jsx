@@ -173,7 +173,7 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
   return (
     <div className="w-screen text-white">
       <SearchField />
-      <div className="w-full text-white px-4">
+      <div className="w-full text-white px-4 mt-[1.5rem] md:px-8">
         <h1 className="text-left text-3xl">{genreName}</h1>
         <div className="flex flex-col grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
           {movies.length > 0 && (

@@ -26,10 +26,12 @@ function TrendingMovies({ currentPathName, currentPage, movieOrTv }) {
   localStorage.getItem("movieOrTv");
 
   return (
-    <div className="mt-6 w-screen px-4">
+    <div className="mt-6 w-screen px-4 md:px-8">
       <div className="flex flex-row items-center w-full justify-between">
         <div className="flex items-center gap-[8px]">
-          <p className="outfit text-white text-[20px]">Trending</p>
+          <p className="outfit text-white text-[20px] md:text-[24px]">
+            Trending
+          </p>
           <p className="rounded-md border-2 py-1 px-2 text-[8px] text-white font-medium">
             MOVIE
           </p>
@@ -42,12 +44,12 @@ function TrendingMovies({ currentPathName, currentPage, movieOrTv }) {
       </div>
       {trendingData && (
         <>
-          <section className="relative flex gap-x-4 overflow-x-scroll mt-4">
+          <section className="relative flex gap-x-4 overflow-x-scroll mt-4 md:gap-x-[2.5rem] gap-y-[2rem]">
             {trendingData.slice(0, 10).map((movie, index) => (
               <div className="relative w-full rounded-lg" key={index}>
                 <div
                   key={index}
-                  className="relative w-[240px] h-[140px] rounded-lg"
+                  className="relative w-[240px] h-[140px] rounded-lg md:w-[470px] md:h-[230px]"
                 >
                   <img
                     src={`${

@@ -29,7 +29,7 @@ function MovieGenres({ currentPage }) {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="grid grid-cols-1 sm:grid-cols-3 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:px-6 md:pt-6">
         {movieGenres &&
           movieGenres.map((genre, index, array) => {
             if (index + 1 === array.length) {

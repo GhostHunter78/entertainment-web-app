@@ -14,9 +14,6 @@ function SeeMoreMoviesPage({
 }) {
   const [popularData, setPopularData] = useState(null);
   const [trendingData, setTrendingData] = useState(null);
-
-  console.log(popularData);
-
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -117,10 +114,10 @@ function SeeMoreMoviesPage({
   }, [currentPage]);
 
   return (
-    <div className="w-screen text-white">
+    <div className="w-screen text-white ">
       <SearchField />
-      <div className="px-4">
-        <p className="text-white text-[20px] mt-4 capitalize">
+      <div className="px-4 md:px-8">
+        <p className="text-white text-[20px] mt-4 capitalize md:text-[24px]">
           {movieCategory()} {movieOrTv === "movie" ? "Movies" : "TV Series"}
         </p>
         {apiAddress === "trending"

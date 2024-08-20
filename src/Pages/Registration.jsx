@@ -17,7 +17,7 @@ const Registration = () => {
   return (
     <div className="flex flex-col items-center w-screen pt-[48px] pb-[170px] px-[24px]">
       <Logo />
-      <div className="w-full flex flex-col items-center px-[24px] pt-[24px] pb-[32px] bg-blue mt-[59px] rounded-lg">
+      <div className="w-full flex flex-col items-center px-[24px] pt-[24px] pb-[32px] bg-blue mt-[59px] rounded-lg md:w-[480px]">
         <div className="flex flex-col items-start w-full">
           <p className="outfit text-[24px] text-white font-light">Sign Up</p>
           <form className="mt-[30px] w-full" onSubmit={handleSubmit(onSubmit)}>

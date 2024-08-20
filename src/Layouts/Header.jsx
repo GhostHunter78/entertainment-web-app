@@ -13,11 +13,11 @@ const Header = () => {
 
   return (
     <>
-      <div className="w-screen bg-blue px-4 py-4 flex items-center justify-between">
+      <div className="w-screen bg-blue px-4 py-4 flex items-center justify-between md:px-8">
         <Link to={"/home"}>
           <Logo />
         </Link>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 md:gap-[5.5rem]">
           <Link to={"/home"}>
             <IconHome activePage={currentPage} />
           </Link>

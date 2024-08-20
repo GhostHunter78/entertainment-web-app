@@ -27,10 +27,12 @@ function NowPlaying({ currentPathName, currentPage, movieOrTv }) {
     getNowPlaying();
   }, []);
   return (
-    <div className="mt-10 w-screen px-4">
+    <div className="mt-10 w-screen px-4 md:px-8">
       <div className="flex flex-row items-center w-full justify-between">
         <div className="flex items-center gap-[8px]">
-          <p className="outfit text-white text-[20px]">Now Playing</p>
+          <p className="outfit text-white text-[20px] md:text-[24px]">
+            Now Playing
+          </p>
           <p className="rounded-md border-2 py-1 px-2 text-[8px] text-white font-medium">
             MOVIE
           </p>
@@ -43,7 +45,7 @@ function NowPlaying({ currentPathName, currentPage, movieOrTv }) {
       </div>
       {nowPlayingData && (
         <>
-          <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
+          <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 gap-y-[2rem]">
             {nowPlayingData.slice(0, 6).map((movie, index) => (
               <div key={index} className="relative">
                 <div className="h-[133px] overflow-hidden rounded-lg">
