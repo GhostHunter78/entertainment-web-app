@@ -24,13 +24,13 @@ function TrendingSeries({ currentPathName, currentPage, movieOrTv }) {
   }, []);
 
   return (
-    <div className="mt-6 w-screen px-4 md:px-8">
+    <div className="mt-6 w-screen px-4 md:px-8 lg:pr-[90px] lg:pl-[160px]">
       <div className="flex flex-row items-center w-full justify-between">
         <div className="flex items-center gap-[8px]">
-          <p className="outfit text-white text-[20px] md:text-[24px]">
+          <p className="outfit text-white text-[20px] md:text-[24px] lg:text-[32px]">
             Trending
           </p>
-          <p className="rounded-md border-2 py-1 px-2 text-[8px] text-black bg-white font-medium">
+          <p className="rounded-md border-2 py-1 px-2 text-[8px] text-black bg-white font-medium lg:text-[10px]">
             TV SERIES
           </p>
         </div>
@@ -58,7 +58,7 @@ function TrendingSeries({ currentPathName, currentPage, movieOrTv }) {
                   />
                   <div className="overlay absolute inset-0 bg-black rounded-lg bg-opacity-30"></div>
                   <div className="absolute left-4 bottom-4 z-40 h-fit w-fit truncate text-ellipsis">
-                    <div className="mb-1 flex text-[11px] font-light items-center">
+                    <div className="mb-1 flex text-[11px] font-light items-center lg:text-[14px]">
                       <p>
                         {movie.first_air_date &&
                           movie.first_air_date.substring(0, 4)}
@@ -80,7 +80,7 @@ function TrendingSeries({ currentPathName, currentPage, movieOrTv }) {
                         {movie.media_type && movie.media_type}
                       </p>
                     </div>
-                    <p className="text-ellips w-[200px] truncate text-sm font-bold capitalize text-white">
+                    <p className="text-ellips w-[200px] truncate text-sm font-bold capitalize text-white lg:text-[20px]">
                       {movie.name}
                     </p>
                   </div>

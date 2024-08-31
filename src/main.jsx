@@ -17,8 +17,10 @@ import SeriesByGenre from "./Pages/SeriesByGenres";
 const Layout = () => {
   return (
     <>
-      <Header />
-      <Outlet />
+      <div>
+        <Header />
+        <Outlet />
+      </div>
       <Footer />
     </>
   );

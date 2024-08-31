@@ -15,8 +15,10 @@ import {
 const Home = ({ currentPage, currentPathName, movieOrTv }) => {
   return (
     <>
-      <div className="text-white ">
-        <SearchField />
+      <div className="text-white">
+        <div className="lg:pr-[90px] lg:pl-[160px]">
+          <SearchField />
+        </div>
         <TrendingMovies
           currentPathName={"trending"}
           currentPage={currentPage}

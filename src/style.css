@@ -32,3 +32,14 @@ body {
 .red-cursor {
   caret-color: #fc4747;
 }
+
+.vertical-nav-bar {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: rotate(-90deg) translateY(-50%);
+  transform-origin: left top;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

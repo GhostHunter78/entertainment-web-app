@@ -23,13 +23,13 @@ function OnAir({ currentPathName, currentPage, movieOrTv }) {
     getOnAir();
   }, []);
   return (
-    <div className="mt-6 w-screen px-4 md:px-8">
+    <div className="mt-6 w-screen px-4 md:px-8 lg:pr-[90px] lg:pl-[160px]">
       <div className="flex flex-row items-center w-full justify-between">
         <div className="flex items-center gap-[8px]">
-          <p className="outfit text-white text-[20px] md:text-[24px]">
+          <p className="outfit text-white text-[20px] md:text-[24px] lg:text-[32px]">
             On The Air
           </p>
-          <p className="rounded-md border-2 py-1 px-2 text-[8px] text-black bg-white font-medium">
+          <p className="rounded-md border-2 py-1 px-2 text-[8px] text-black bg-white font-medium lg:text-[10px]">
             TV SERIES
           </p>
         </div>
@@ -41,10 +41,13 @@ function OnAir({ currentPathName, currentPage, movieOrTv }) {
       </div>
       {onAirData && (
         <>
-          <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 gap-y-[2rem]">
+          <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 gap-y-[2rem] lg:grid-cols-4 lg:gap-8">
             {onAirData.slice(0, 6).map((series, index) => (
-              <div key={index} className="relative">
-                <div className="h-[133px] overflow-hidden rounded-lg">
+              <div
+                key={index}
+                className={`relative ${index >= 4 ? "lg:col-span-2" : ""}`}
+              >
+                <div className="h-[133px] overflow-hidden rounded-lg lg:h-[180px]">
                   <img
                     src={`${
                       series.backdrop_path &&
@@ -55,7 +58,7 @@ function OnAir({ currentPathName, currentPage, movieOrTv }) {
                   />
                 </div>
                 <div className="mt-2 w-full">
-                  <div className="mb-1 flex text-[11px] font-light items-center">
+                  <div className="mb-1 flex text-[11px] font-light items-center lg:text-[14px]">
                     <p>
                       {series.first_air_date &&
                         series.first_air_date.substring(0, 4)}
@@ -75,7 +78,7 @@ function OnAir({ currentPathName, currentPage, movieOrTv }) {
                     </svg>
                     <p className="ml-2 uppercase">tv</p>
                   </div>
-                  <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white">
+                  <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white lg:text-[20px]">
                     {series.name}
                   </p>
                 </div>

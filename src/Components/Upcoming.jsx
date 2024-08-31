@@ -27,13 +27,13 @@ function Upcoming({ currentPathName, currentPage, movieOrTv }) {
     getUpcoming();
   }, []);
   return (
-    <div className="mt-10 w-screen px-4 md:px-8">
+    <div className="mt-10 w-screen px-4 md:px-8 lg:pr-[90px] lg:pl-[160px]">
       <div className="flex flex-row items-center w-full justify-between">
         <div className="flex items-center gap-[8px]">
-          <p className="outfit text-white text-[20px] md:text-[24px]">
+          <p className="outfit text-white text-[20px] md:text-[24px] lg:text-[32px]">
             Upcoming
           </p>
-          <p className="rounded-md border-2 py-1 px-2 text-[8px] text-white font-medium">
+          <p className="rounded-md border-2 py-1 px-2 text-[8px] text-white font-medium lg:text-[10px]">
             MOVIE
           </p>
         </div>
@@ -45,10 +45,13 @@ function Upcoming({ currentPathName, currentPage, movieOrTv }) {
       </div>
       {upcomingData && (
         <>
-          <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 gap-y-[2rem]">
+          <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 gap-y-[2rem] lg:grid-cols-4 lg:gap-8">
             {upcomingData.slice(0, 6).map((movie, index) => (
-              <div key={index} className="relative">
-                <div className="h-[133px] overflow-hidden rounded-lg">
+              <div
+                key={index}
+                className={`relative ${index >= 4 ? "lg:col-span-2" : ""}`}
+              >
+                <div className="h-[133px] overflow-hidden rounded-lg lg:h-[180px]">
                   <img
                     src={`${
                       movie.backdrop_path &&
@@ -59,7 +62,7 @@ function Upcoming({ currentPathName, currentPage, movieOrTv }) {
                   />
                 </div>
                 <div className="mt-2 w-full">
-                  <div className="mb-1 flex text-[11px] font-light items-center">
+                  <div className="mb-1 flex text-[11px] font-light items-center lg:text-[14px]">
                     <p>
                       {movie.release_date && movie.release_date.substring(0, 4)}
                     </p>
@@ -78,7 +81,7 @@ function Upcoming({ currentPathName, currentPage, movieOrTv }) {
                     </svg>
                     <p className="ml-2 capitalize">Movie</p>
                   </div>
-                  <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white">
+                  <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white lg:text-[20px]">
                     {movie.title}
                   </p>
                 </div>
