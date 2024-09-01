@@ -171,17 +171,17 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="w-screen text-white">
+    <div className="w-screen text-white lg:pr-[90px] lg:pl-[160px]">
       <SearchField />
       <div className="w-full text-white px-4 mt-[1.5rem] md:px-8">
-        <h1 className="text-left text-3xl">{genreName}</h1>
+        <h1 className="text-left text-3xl lg:text-[32px]">{genreName}</h1>
         <div className="flex flex-col grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
           {movies.length > 0 && (
             <>
-              <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
+              <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 lg:grid-cols-4 lg:gap-8">
                 {movies.slice(0, 20).map((movie, index) => (
                   <div key={index} className="relative">
-                    <div className="h-[133px] overflow-hidden rounded-lg">
+                    <div className="h-[133px] overflow-hidden rounded-lg lg:h-[180px]">
                       <img
                         src={`${
                           movie.backdrop_path
@@ -193,7 +193,7 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
                       />
                     </div>
                     <div className="mt-2 w-full">
-                      <div className="mb-1 flex text-[11px] font-light items-center">
+                      <div className="mb-1 flex text-[11px] font-light items-center lg:text-[14px]">
                         <p>
                           {movie.release_date &&
                             movie.release_date.substring(0, 4)}
@@ -213,7 +213,7 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
                         </svg>
                         <p className="ml-2 capitalize">Movie</p>
                       </div>
-                      <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white">
+                      <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white lg:text-[20px]">
                         {movie.original_title}
                       </p>
                     </div>
