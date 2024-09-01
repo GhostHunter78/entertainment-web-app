@@ -35,8 +35,8 @@ function SeriesGenres({ currentPage }) {
     .catch((err) => console.error(err));
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:px-6 md:pt-6">
+    <div className="flex flex-col items-center w-full lg:pr-[90px] lg:pl-[100px] lg:pt-[35px]">
+      <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:px-6 md:pt-6 lg:grid-cols-6 lg:ml-[90px]">
         {seriesGenres &&
           seriesGenres.map((genre, index, array) => {
             if (index + 1 === array.length) {
@@ -44,7 +44,7 @@ function SeriesGenres({ currentPage }) {
                 <a
                   key={genre.id}
                   onClick={() => handleGenreClick(genre.id)}
-                  className="col-span-full m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreGreen"
+                  className="col-span-full m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreGreen lg:col-span-3 lg:cursor-pointer"
                 >
                   {genre.name}
                 </a>
@@ -54,7 +54,7 @@ function SeriesGenres({ currentPage }) {
                 <a
                   key={genre.id}
                   onClick={() => handleGenreClick(genre.id)}
-                  className="m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreGreen"
+                  className="m-2 flex h-44  grow items-center justify-center rounded-lg p-8 text-center text-xl text-white font-medium even:bg-blue odd:bg-genreGreen lg:cursor-pointer"
                 >
                   {genre.name}
                 </a>
