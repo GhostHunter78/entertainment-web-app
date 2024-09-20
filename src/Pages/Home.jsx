@@ -12,7 +12,16 @@ import {
   TopRatedSeries,
 } from "../Components";
 
-const Home = ({ currentPage, currentPathName, movieOrTv }) => {
+const Home = ({
+  currentPage,
+  currentPathName,
+  movieOrTv,
+  setMovieOrTv,
+  movieName,
+  setMovieName,
+  setFilmId,
+  filmId,
+}) => {
   return (
     <>
       <div className="text-white">
@@ -25,9 +34,12 @@ const Home = ({ currentPage, currentPathName, movieOrTv }) => {
           movieOrTv={"movie"}
         />
         <PopularMovies
-          currentPathName={"popular"}
+          currentPathName={currentPathName}
           currentPage={currentPage}
-          movieOrTv={"movie"}
+          movieOrTv="movie"
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
         <NowPlaying
           currentPathName={"now_playing"}
@@ -50,9 +62,12 @@ const Home = ({ currentPage, currentPathName, movieOrTv }) => {
           currentPage={currentPage}
         />
         <PopularSeries
-          movieOrTv={"tv"}
-          currentPathName={"popular"}
+          currentPathName={currentPathName}
           currentPage={currentPage}
+          movieOrTv="tv"
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
         <AiringToday
           movieOrTv={"tv"}

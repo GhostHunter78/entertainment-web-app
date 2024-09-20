@@ -12,6 +12,8 @@ import SeriesGenres from "./Pages/SeriesGenres";
 import SeeMoreMoviesPage from "./Pages/SeeMoreMoviesPage";
 import MoviesByGenre from "./Pages/MoviesByGenres";
 import SeriesByGenre from "./Pages/SeriesByGenres";
+import MoviePage from "./Pages/MoviePage";
+import TvPage from "./Pages/TvPage";
 
 // Layout component to render the Header and Footer
 const Layout = () => {
@@ -30,11 +32,15 @@ const App = () => {
   // State for currentPage
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPathName, setCurrentPathName] = useState("");
+  const [movieName, setMovieName] = useState("");
+  const [filmId, setFilmId] = useState("");
   const [movieOrTv, setMovieOrTv] = useState("movie");
 
   localStorage.setItem("movieOrTv", movieOrTv);
   localStorage.setItem("currentPathName", currentPathName);
   localStorage.setItem("currentPage", currentPage);
+  localStorage.setItem("filmId", filmId);
+  localStorage.setItem("movieName", movieName);
 
   // Create the router configuration
   const router = createBrowserRouter([
@@ -53,6 +59,10 @@ const App = () => {
               currentPathName={currentPathName}
               movieOrTv={movieOrTv}
               setMovieOrTv={setMovieOrTv}
+              movieName={movieName}
+              setMovieName={setMovieName}
+              setFilmId={setFilmId}
+              filmId={filmId}
             />
           ),
         },
@@ -106,6 +116,28 @@ const App = () => {
               setCurrentPathName={setCurrentPathName}
               movieOrTv={movieOrTv}
               setMovieOrTv={setMovieOrTv}
+            />
+          ),
+        },
+        {
+          path: `:filmId/movie/:movieName`,
+          element: (
+            <MoviePage
+              movieName={movieName}
+              setMovieName={setMovieName}
+              setFilmId={setFilmId}
+              filmId={filmId}
+            />
+          ),
+        },
+        {
+          path: `:filmId/tv/:movieName`,
+          element: (
+            <TvPage
+              movieName={movieName}
+              setMovieName={setMovieName}
+              setFilmId={setFilmId}
+              filmId={filmId}
             />
           ),
         },
