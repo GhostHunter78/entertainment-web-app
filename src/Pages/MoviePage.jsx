@@ -83,7 +83,7 @@ function MoviePage({ setMovieName, setFilmId }) {
       .catch((err) => console.error(err));
   };
 
-  console.log(similarMoviesData);
+  console.log(castData);
 
   useEffect(() => {
     getMovieDetails();
@@ -219,9 +219,11 @@ function MoviePage({ setMovieName, setFilmId }) {
         <section className="mt-9">
           <div className="w-full flex items-center justify-between">
             <h2 className="text-white font-semibold text-[18px]">Cast</h2>
-            <p onClick={toggleCastWindow} className="text-white font-normal">
-              See More
-            </p>
+            {castData.cast && castData.cast.length > 12 ? (
+              <p onClick={toggleCastWindow} className="text-white font-normal">
+                See More
+              </p>
+            ) : null}
           </div>
           <div className="flex mt-4 overflow-x-auto gap-x-4">
             {castData.cast &&

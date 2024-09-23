@@ -80,10 +80,6 @@ function TvPage({ setMovieName, setFilmId }) {
       .catch((err) => console.error(err));
   };
 
-  // console.log(similarMoviesData);
-  console.log(castData);
-  // console.log(detailsData);
-
   useEffect(() => {
     getMovieDetails();
     getMovieCast();
