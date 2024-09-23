@@ -46,7 +46,7 @@ function TrendingSeries({ currentPathName, currentPage, movieOrTv }) {
             {trendingData.slice(0, 10).map((movie, index) => (
               <Link
                 key={index}
-                to={`/${movie.id}/tv/${movie.title.split(" ").join("-")}`}
+                to={`/${movie.id}/tv/${movie.name.split(" ").join("-")}`}
               >
                 <div className="relative w-full rounded-lg" key={index}>
                   <div

@@ -49,7 +49,7 @@ function AiringToday({ currentPathName, currentPage, movieOrTv }) {
             {airingData.slice(0, 6).map((series, index) => (
               <Link
                 key={index}
-                to={`/${movie.id}/tv/${movie.title.split(" ").join("-")}`}
+                to={`/${series.id}/tv/${series.name.split(" ").join("-")}`}
               >
                 <div
                   key={index}
