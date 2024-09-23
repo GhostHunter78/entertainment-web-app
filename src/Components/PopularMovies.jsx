@@ -68,9 +68,7 @@ function PopularMovies({
             {popularData.slice(0, 6).map((movie, index) => (
               <Link
                 key={index}
-                to={`/${movie.id}/${movieOrTv}/${movie.title
-                  .split(" ")
-                  .join("-")}`}
+                to={`/${movie.id}/movie/${movie.title.split(" ").join("-")}`}
               >
                 <div
                   key={index}
