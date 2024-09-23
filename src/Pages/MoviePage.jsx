@@ -111,10 +111,12 @@ function MoviePage({ setMovieName, setFilmId }) {
             : { filter: "blur(0px)", transition: "filter 0.3s ease-in-out" }
         }
       >
-        <div className="w-full pl-[10px] flex items-center gap-2">
-          <FaArrowLeft className="fill-white" />
-          <p className="text-white ">Go Back</p>
-        </div>
+        <Link to={"/home"}>
+          <div className="w-full pl-[10px] flex items-center gap-2">
+            <FaArrowLeft className="fill-white" />
+            <p className="text-white ">Go Back</p>
+          </div>
+        </Link>
         <div className="flex flex-col items-center justify-center mt-[30px]">
           <img
             className="w-[85%] max-w-[400px] rounded-[25px]"
@@ -260,7 +262,7 @@ function MoviePage({ setMovieName, setFilmId }) {
                   to={`/${movie.id}/movie/${movie.title.split(" ").join("-")}`}
                 >
                   <div className="relative w-full rounded-lg" key={index}>
-                    <div className="relative w-[240px] h-[140px] rounded-lg md:w-[470px] md:h-[230px]">
+                    <div className="relative w-[240px] h-[140px] rounded-lg md:w-[470px] md:h-[230px] mb-4">
                       <img
                         src={
                           movie.backdrop_path
@@ -307,7 +309,7 @@ function MoviePage({ setMovieName, setFilmId }) {
       </div>
 
       {isOpen ? (
-        <div className="w-screen fixed bottom-[25%] left-0 z-100 px-4 overflow-y-scroll">
+        <div className="w-screen fixed bottom-[150px] left-0 z-100 px-4 overflow-y-scroll">
           <div className="w-full bg-white rounded-lg">
             <div className="w-full pt-2 px-4 flex items-end justify-end">
               <FaWindowClose
@@ -316,7 +318,7 @@ function MoviePage({ setMovieName, setFilmId }) {
               />
             </div>
             {castData.cast &&
-              castData.cast.slice(9, 16).map((pfp) => (
+              castData.cast.slice(9, 14).map((pfp) => (
                 <div
                   key={pfp.id}
                   className="w-full px-4 border-b-gray-200 border-b py-3 rounded-lg flex items-center gap-3"
