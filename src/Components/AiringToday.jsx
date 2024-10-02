@@ -1,8 +1,25 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-function AiringToday({ currentPathName, currentPage, movieOrTv }) {
+function AiringToday({
+  currentPage,
+  currentPathName,
+  movieOrTv,
+  setMovieOrTv,
+  movieName,
+  setMovieName,
+  setFilmId,
+  filmId,
+}) {
   const [airingData, setAiringData] = useState(null);
+
+  const params = useParams();
+
+  useEffect(() => {
+    setMovieOrTv(params.movieOrTv);
+    setFilmId(params.filmId);
+    setMovieName(params.movieNameName);
+  }, [filmId, movieName, movieOrTv]);
 
   const getAiringToday = async () => {
     try {
@@ -37,7 +54,7 @@ function AiringToday({ currentPathName, currentPage, movieOrTv }) {
             TV SERIES
           </p>
         </div>
-        <Link to={`/${currentPathName}/${movieOrTv}/${currentPage}`}>
+        <Link to={`/see-more/${currentPathName}/${movieOrTv}/${currentPage}`}>
           <p className="text-xs font-semibold outfit text-seeMore hover:underline">
             SEE MORE
           </p>

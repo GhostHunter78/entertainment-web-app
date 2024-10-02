@@ -31,7 +31,7 @@ const Layout = () => {
 const App = () => {
   // State for currentPage
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentPathName, setCurrentPathName] = useState("");
+  const [currentPathName, setCurrentPathName] = useState("popular");
   const [movieName, setMovieName] = useState("");
   const [filmId, setFilmId] = useState("");
   const [movieOrTv, setMovieOrTv] = useState("movie");
@@ -108,11 +108,12 @@ const App = () => {
         },
         // Passing currentPage as a prop to PopularMoviesPages
         {
-          path: `:currentPathname/:movieOrTv/:currentPage`,
+          path: `see-more/:currentPathname/:movieOrTv/:currentPage`,
           element: (
             <SeeMoreMoviesPage
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
+              currentPathName={currentPathName}
               setCurrentPathName={setCurrentPathName}
               movieOrTv={movieOrTv}
               setMovieOrTv={setMovieOrTv}

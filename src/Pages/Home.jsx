@@ -32,6 +32,9 @@ const Home = ({
           currentPathName={"trending"}
           currentPage={currentPage}
           movieOrTv={"movie"}
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
         <PopularMovies
           currentPathName={currentPathName}
@@ -45,24 +48,36 @@ const Home = ({
           currentPathName={"now_playing"}
           currentPage={currentPage}
           movieOrTv={"movie"}
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
         <Upcoming
           currentPathName={"upcoming"}
           currentPage={currentPage}
           movieOrTv={"movie"}
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
         <TopRated
           currentPathName={"top_rated"}
           currentPage={currentPage}
           movieOrTv={"movie"}
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
         <TrendingSeries
           movieOrTv={"tv"}
           currentPathName={"trending"}
           currentPage={currentPage}
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
         <PopularSeries
-          currentPathName={currentPathName}
+          currentPathName={"popular"}
           currentPage={currentPage}
           movieOrTv="tv"
           setMovieOrTv={setMovieOrTv}
@@ -73,16 +88,25 @@ const Home = ({
           movieOrTv={"tv"}
           currentPathName={"airing_today"}
           currentPage={currentPage}
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
         <OnAir
           movieOrTv={"tv"}
           currentPathName={"on_the_air"}
           currentPage={currentPage}
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
         <TopRatedSeries
           movieOrTv={"tv"}
           currentPathName={"top_rated"}
           currentPage={currentPage}
+          setMovieOrTv={setMovieOrTv}
+          setFilmId={setFilmId}
+          setMovieName={setMovieName}
         />
       </div>
     </>

@@ -15,6 +15,7 @@ function PopularMovies({
 
   const params = useParams();
   localStorage.getItem("movieOrTv");
+  localStorage.getItem("currentPathName");
 
   useEffect(() => {
     setMovieOrTv(params.movieOrTv);
@@ -33,7 +34,7 @@ function PopularMovies({
     };
 
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+      `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${currentPage}`,
       options
     )
       .then((response) => response.json())
@@ -56,7 +57,7 @@ function PopularMovies({
             MOVIE
           </p>
         </div>
-        <Link to={`/${currentPathName}/${movieOrTv}/${currentPage}`}>
+        <Link to={`/see-more/popular/${movieOrTv}/${currentPage}`}>
           <p className="text-xs font-semibold outfit text-seeMore hover:underline">
             SEE MORE
           </p>

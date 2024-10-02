@@ -112,108 +112,111 @@ function MoviePage({ setMovieName, setFilmId }) {
         }
       >
         <Link to={"/home"}>
-          <div className="w-full pl-[10px] flex items-center gap-2">
+          <div className="w-fit pl-[10px] flex items-center gap-2">
             <FaArrowLeft className="fill-white" />
             <p className="text-white ">Go Back</p>
           </div>
         </Link>
-        <div className="flex flex-col items-center justify-center mt-[30px]">
+        <div className="w-full flex flex-col items-center justify-center mt-[30px] md:flex-row md:items-start md:gap-[40px] lg:gap-[100px]">
           <img
-            className="w-[85%] max-w-[400px] rounded-[25px]"
+            className="w-[85%] max-w-[400px] rounded-[25px] md:w-fit md:max-w-[300px] lg:max-w-[400px]"
             src={`https://image.tmdb.org/t/p/w500${
               detailsData.poster_path && detailsData.poster_path
             }`}
             alt={detailsData.title || "Movie Poster"}
           />
-          <h1 className="text-white text-[28px] mt-5 font-bold">
-            {detailsData.title && detailsData.title}
-          </h1>
-          <h1 className="text-white text-[28px] font-bold">
-            (
-            {detailsData.release_date &&
-              detailsData.release_date.substring(0, 4)}
-            )
-          </h1>
-          <h1 className="text-gray-300 text-[18px] mt-4">
-            {detailsData.tagline && detailsData.tagline}
-          </h1>
-          <div className="flex items-center justify-center gap-5 mt-[40px]">
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-white text-[24px]">User Score</h2>
-              <h2 className="text-gray-300 text-[16px]">
-                ({detailsData.vote_count && detailsData.vote_count} voted)
-              </h2>
-            </div>
-            <div className="circular-progress-wrapper">
-              <svg className="circular-progress" viewBox="0 0 36 36">
-                <path
-                  className="circle-bg"
-                  d="M18 2.0845
+          <div className="md:flex md:flex-col md:items-start">
+            <h1 className="text-white text-[28px] mt-5 font-bold md:mt-0">
+              {detailsData.title && detailsData.title}
+            </h1>
+            <h1 className="text-white text-[28px] font-bold">
+              (
+              {detailsData.release_date &&
+                detailsData.release_date.substring(0, 4)}
+              )
+            </h1>
+            <h1 className="text-gray-300 text-[18px] mt-4">
+              {detailsData.tagline && detailsData.tagline}
+            </h1>
+            <div className="flex items-center justify-center gap-5 mt-[40px]">
+              <div className="flex flex-col items-center gap-y-1">
+                <h2 className="text-white text-[24px]">User Score</h2>
+                <h2 className="text-gray-300 text-[16px]">
+                  ({detailsData.vote_count && detailsData.vote_count} voted)
+                </h2>
+              </div>
+              <div className="circular-progress-wrapper">
+                <svg className="circular-progress" viewBox="0 0 36 36">
+                  <path
+                    className="circle-bg"
+                    d="M18 2.0845
          a 15.9155 15.9155 0 0 1 0 31.831
          a 15.9155 15.9155 0 0 1 0 -31.831"
-                />
-                <path
-                  className="circle"
-                  strokeDasharray={`${ratingPercentage}, 100`}
-                  d="M18 2.0845
+                  />
+                  <path
+                    className="circle"
+                    strokeDasharray={`${ratingPercentage}, 100`}
+                    d="M18 2.0845
          a 15.9155 15.9155 0 0 1 0 31.831
          a 15.9155 15.9155 0 0 1 0 -31.831"
-                />
-                <text x="18" y="20.35" className="percentage-text">
-                  {ratingPercentage}%
-                </text>
-              </svg>
+                  />
+                  <text x="18" y="20.35" className="percentage-text">
+                    {ratingPercentage}%
+                  </text>
+                </svg>
+              </div>
             </div>
-          </div>
-          <div className="w-full flex items-start justify-between mt-9">
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-gray-400 font-semibold text-[18px]">
-                Length
-              </h2>
-              <p className="text-white text-[16px] font-normal">
-                {formattedRuntime}
+            <div className="w-full flex items-start justify-between mt-9">
+              <div className="flex flex-col items-center gap-y-1">
+                <h2 className="text-gray-400 font-semibold text-[18px]">
+                  Length
+                </h2>
+                <p className="text-white text-[16px] font-normal">
+                  {formattedRuntime}
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-y-1">
+                <h2 className="text-gray-400 font-semibold text-[18px]">
+                  Language
+                </h2>
+                <p className="text-white text-[16px] font-normal uppercase">
+                  {detailsData.original_language &&
+                    detailsData.original_language}
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-y-1">
+                <h2 className="text-gray-400 font-semibold text-[18px]">
+                  Country
+                </h2>
+                <p className="text-white text-[16px] font-normal">
+                  {detailsData.origin_country && detailsData.origin_country[0]}
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-y-1">
+                <h2 className="text-gray-400 font-semibold text-[18px]">
+                  Status
+                </h2>
+                <p className="text-white text-[16px] font-normal">Released</p>
+              </div>
+            </div>
+            <div className="w-full mt-9 flex flex-col justify-start items-start">
+              <p className=" text-white font-bold text-[18px]">Genres</p>
+              <div className="w-full flex items-center gap-2 mt-2">
+                {detailsData.genres &&
+                  detailsData.genres.map((genre) => (
+                    <div
+                      key={genre.id}
+                      className="w-fit px-2 py-1 bg-white rounded-lg"
+                    >
+                      {genre.name}
+                    </div>
+                  ))}
+              </div>
+              <p className="text-white font-bold mt-9 text-[18px]">Synopsis</p>
+              <p className="w-full mt-2 text-[16px] text-white">
+                {detailsData.overview && detailsData.overview}
               </p>
             </div>
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-gray-400 font-semibold text-[18px]">
-                Language
-              </h2>
-              <p className="text-white text-[16px] font-normal uppercase">
-                {detailsData.original_language && detailsData.original_language}
-              </p>
-            </div>
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-gray-400 font-semibold text-[18px]">
-                Country
-              </h2>
-              <p className="text-white text-[16px] font-normal">
-                {detailsData.origin_country && detailsData.origin_country[0]}
-              </p>
-            </div>
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-gray-400 font-semibold text-[18px]">
-                Status
-              </h2>
-              <p className="text-white text-[16px] font-normal">Released</p>
-            </div>
-          </div>
-          <div className="w-full mt-9 flex flex-col justify-start items-start">
-            <p className=" text-white font-bold text-[18px]">Genres</p>
-            <div className="w-full flex items-center gap-2 mt-2">
-              {detailsData.genres &&
-                detailsData.genres.map((genre) => (
-                  <div
-                    key={genre.id}
-                    className="w-fit px-2 py-1 bg-white rounded-lg"
-                  >
-                    {genre.name}
-                  </div>
-                ))}
-            </div>
-            <p className="text-white font-bold mt-9 text-[18px]">Synopsis</p>
-            <p className="w-full mt-2 text-[16px] text-white">
-              {detailsData.overview && detailsData.overview}
-            </p>
           </div>
         </div>
         <section className="mt-9">
@@ -320,7 +323,7 @@ function MoviePage({ setMovieName, setFilmId }) {
 
       {isOpen ? (
         <div className="w-screen fixed bottom-[150px] left-0 z-100 px-4 overflow-y-scroll">
-          <div className="w-full bg-white rounded-lg">
+          <div className="w-full bg-white rounded-lg md:w-[350px] ml-auto mr-auto">
             <div className="w-full pt-2 px-4 flex items-end justify-end">
               <FaWindowClose
                 onClick={() => setIsOpen(!isOpen)}

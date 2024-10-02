@@ -37,7 +37,7 @@ function Upcoming({ currentPathName, currentPage, movieOrTv }) {
             MOVIE
           </p>
         </div>
-        <Link to={`/${currentPathName}/${movieOrTv}/${currentPage}`}>
+        <Link to={`/see-more/${currentPathName}/${movieOrTv}/${currentPage}`}>
           <p className="text-xs font-semibold outfit text-seeMore hover:underline">
             SEE MORE
           </p>
