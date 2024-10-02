@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaWindowClose } from "react-icons/fa";
 
@@ -25,6 +25,12 @@ function MoviePage({ setMovieName, setFilmId }) {
       setFilmId(filmId);
     }
   }, [filmId, movieName, setFilmId, setMovieName]);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const getMovieCast = async () => {
     const options = {

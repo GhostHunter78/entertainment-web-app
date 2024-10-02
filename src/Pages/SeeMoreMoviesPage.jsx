@@ -64,6 +64,12 @@ function SeeMoreMoviesPage({
     navigate(`/see-more/${apiAddress}/${movieOrTv}/${prevPage}`);
   };
 
+  const { pathname } = useLocation(); // Gets the current route
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page
+  }, [pathname]); // Runs whenever the route changes
+
   const getSeeMoreMoviesPage = async () => {
     try {
       const response = await axios.get(

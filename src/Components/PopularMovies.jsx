@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 function PopularMovies({
   currentPage,
@@ -22,6 +22,12 @@ function PopularMovies({
     setFilmId(params.filmId);
     setMovieName(params.movieNameName);
   }, [filmId, movieName, movieOrTv]);
+
+  const { pathname } = useLocation(); // Gets the current route
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page
+  }, [pathname]); // Runs whenever the route changes
 
   const getPopularMovies = async () => {
     const options = {

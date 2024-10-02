@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function MovieGenres({ currentPage }) {
   const [movieGenres, setMovieGenres] = useState([]);
@@ -8,6 +8,12 @@ function MovieGenres({ currentPage }) {
   const handleGenreClick = (genreId) => {
     navigate(`/movies/genre/${genreId}/${currentPage}`);
   };
+
+  const { pathname } = useLocation(); // Gets the current route
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page
+  }, [pathname]); // Runs whenever the route changes
 
   useEffect(() => {
     const options = {

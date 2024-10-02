@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ImArrowLeft2, ImArrowRight2 } from "react-icons/im";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { SearchField } from "../Components";
 
 function MoviesByGenre({ currentPage, setCurrentPage }) {
@@ -167,6 +167,12 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
 
     fetchMoviesByGenre();
   }, [genreId, currentPage]);
+
+  const { pathname } = useLocation(); // Gets the current route
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page
+  }, [pathname]); // Runs whenever the route changes
 
   if (loading) return <div>Loading...</div>;
 

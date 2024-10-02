@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function SeriesGenres({ currentPage }) {
   const [seriesGenres, setSeriesGenres] = useState([]);
@@ -8,6 +8,12 @@ function SeriesGenres({ currentPage }) {
   const handleGenreClick = (genreId) => {
     navigate(`/series/genre/${genreId}/${currentPage}`);
   };
+
+  const { pathname } = useLocation(); // Gets the current route
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page
+  }, [pathname]); // Runs whenever the route changes
 
   useEffect(() => {
     fetch("https://api.themoviedb.org/3/genre/tv/list?language=en", options)
