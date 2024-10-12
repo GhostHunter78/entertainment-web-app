@@ -15,11 +15,11 @@ function SearchField() {
   };
 
   return (
-    <div className="w-full flex items-end justify-between">
+    <div className="w-full flex items-baseline justify-between pr-4">
       <div className="w-full grid relative mt-6 cursor-pointer">
         <input
           id="searchInput"
-          className="bg-BgBody py-4 pl-[74px] pr-8 border-none rounded ml-26 text-[16px] text-white font-normal outfit font-weight-400 leading-20 outline-none lg:text-[20px]"
+          className="bg-BgBody py-4 pl-[70px] border-none rounded ml-26 text-[16px] text-white font-normal outfit font-weight-400 leading-20 outline-none lg:text-[20px]"
           type="text"
           placeholder="Search for movies or TV series"
           value={searchQuery}

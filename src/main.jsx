@@ -145,7 +145,12 @@ const App = () => {
         },
         {
           path: `search-results`,
-          element: <SearchResults />,
+          element: (
+            <SearchResults
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          ),
         },
       ],
     },

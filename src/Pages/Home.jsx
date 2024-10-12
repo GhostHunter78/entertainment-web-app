@@ -25,7 +25,7 @@ const Home = ({
   return (
     <>
       <div className="text-white">
-        <div className="lg:pr-[90px] lg:pl-[160px]">
+        <div className="w-screen lg:pr-[90px] lg:pl-[160px]">
           <SearchField />
         </div>
         <TrendingMovies

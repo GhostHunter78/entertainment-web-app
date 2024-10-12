@@ -108,237 +108,234 @@ function MoviePage({ setMovieName, setFilmId }) {
   const formattedRuntime = `${hours}h ${minutes}m`;
 
   return (
-    <div>
-      <div
-        className="mt-6 w-screen px-4 md:px-8 lg:pr-[90px] lg:pl-[160px]"
-        style={
-          isOpen
-            ? { filter: "blur(5px)", transition: "filter 0.3s ease-in-out" }
-            : { filter: "blur(0px)", transition: "filter 0.3s ease-in-out" }
-        }
-      >
-        <Link to={"/home"}>
-          <div className="w-fit pl-[10px] flex items-center gap-2">
-            <FaArrowLeft className="fill-white" />
-            <p className="text-white ">Go Back</p>
+    <div
+      className="mt-6 w-screen px-4 md:px-8 lg:pr-[90px] lg:pl-[160px]"
+      style={
+        isOpen
+          ? { filter: "blur(5px)", transition: "filter 0.3s ease-in-out" }
+          : { filter: "blur(0px)", transition: "filter 0.3s ease-in-out" }
+      }
+    >
+      <Link to={"/home"}>
+        <div className="w-fit pl-[10px] flex items-center gap-2">
+          <FaArrowLeft className="fill-white" />
+          <p className="text-white ">Go Back</p>
+        </div>
+      </Link>
+      <div className="w-full flex flex-col items-center justify-center mt-[30px] md:flex-row md:items-start md:gap-[40px] lg:gap-[100px]">
+        <img
+          className="w-[85%] max-w-[400px] rounded-[25px] md:w-fit md:max-w-[300px] lg:max-w-[400px]"
+          src={`https://image.tmdb.org/t/p/w500${
+            detailsData.poster_path && detailsData.poster_path
+          }`}
+          alt={detailsData.title || "Movie Poster"}
+        />
+        <div className="w-full md:flex md:flex-col md:items-start">
+          <h1 className="text-white text-[28px] mt-5 font-bold md:mt-0">
+            {detailsData.title && detailsData.title}
+          </h1>
+          <h1 className="text-white text-[28px] font-bold">
+            (
+            {detailsData.release_date &&
+              detailsData.release_date.substring(0, 4)}
+            )
+          </h1>
+          <h1 className="text-gray-300 text-[18px] mt-4 lg:text-[20px]">
+            {detailsData.tagline && detailsData.tagline}
+          </h1>
+          <div className="flex items-center justify-center gap-5 mt-[40px]">
+            <div className="flex flex-col items-center gap-y-1">
+              <h2 className="text-white text-[24px] lg:text-[28px]">
+                User Score
+              </h2>
+              <h2 className="text-gray-300 text-[16px] lg:text-[20px]">
+                ({detailsData.vote_count && detailsData.vote_count} voted)
+              </h2>
+            </div>
+            <div className="circular-progress-wrapper">
+              <svg className="circular-progress" viewBox="0 0 36 36">
+                <path
+                  className="circle-bg"
+                  d="M18 2.0845
+         a 15.9155 15.9155 0 0 1 0 31.831
+         a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+                <path
+                  className="circle"
+                  strokeDasharray={`${ratingPercentage}, 100`}
+                  d="M18 2.0845
+         a 15.9155 15.9155 0 0 1 0 31.831
+         a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+                <text x="18" y="20.35" className="percentage-text">
+                  {ratingPercentage}%
+                </text>
+              </svg>
+            </div>
           </div>
-        </Link>
-        <div className="w-full flex flex-col items-center justify-center mt-[30px] md:flex-row md:items-start md:gap-[40px] lg:gap-[100px]">
-          <img
-            className="w-[85%] max-w-[400px] rounded-[25px] md:w-fit md:max-w-[300px] lg:max-w-[400px]"
-            src={`https://image.tmdb.org/t/p/w500${
-              detailsData.poster_path && detailsData.poster_path
-            }`}
-            alt={detailsData.title || "Movie Poster"}
-          />
-          <div className="md:flex md:flex-col md:items-start">
-            <h1 className="text-white text-[28px] mt-5 font-bold md:mt-0">
-              {detailsData.title && detailsData.title}
-            </h1>
-            <h1 className="text-white text-[28px] font-bold">
-              (
-              {detailsData.release_date &&
-                detailsData.release_date.substring(0, 4)}
-              )
-            </h1>
-            <h1 className="text-gray-300 text-[18px] mt-4 lg:text-[20px]">
-              {detailsData.tagline && detailsData.tagline}
-            </h1>
-            <div className="flex items-center justify-center gap-5 mt-[40px]">
-              <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-white text-[24px] lg:text-[28px]">
-                  User Score
-                </h2>
-                <h2 className="text-gray-300 text-[16px] lg:text-[20px]">
-                  ({detailsData.vote_count && detailsData.vote_count} voted)
-                </h2>
-              </div>
-              <div className="circular-progress-wrapper">
-                <svg className="circular-progress" viewBox="0 0 36 36">
-                  <path
-                    className="circle-bg"
-                    d="M18 2.0845
-         a 15.9155 15.9155 0 0 1 0 31.831
-         a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                  <path
-                    className="circle"
-                    strokeDasharray={`${ratingPercentage}, 100`}
-                    d="M18 2.0845
-         a 15.9155 15.9155 0 0 1 0 31.831
-         a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                  <text x="18" y="20.35" className="percentage-text">
-                    {ratingPercentage}%
-                  </text>
-                </svg>
-              </div>
-            </div>
-            <div className="w-full flex items-start justify-between mt-9">
-              <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
-                  Length
-                </h2>
-                <p className="text-white text-[16px] lg:text-[20px] font-normal">
-                  {formattedRuntime}
-                </p>
-              </div>
-              <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
-                  Language
-                </h2>
-                <p className="text-white text-[16px] lg:text-[20px] font-normal uppercase">
-                  {detailsData.original_language &&
-                    detailsData.original_language}
-                </p>
-              </div>
-              <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
-                  Country
-                </h2>
-                <p className="text-white text-[16px] lg:text-[20px] font-normal">
-                  {detailsData.origin_country && detailsData.origin_country[0]}
-                </p>
-              </div>
-              <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
-                  Status
-                </h2>
-                <p className="text-white text-[16px] lg:text-[20px] font-normal">
-                  Released
-                </p>
-              </div>
-            </div>
-            <div className="w-full mt-9 flex flex-col justify-start items-start">
-              <p className=" text-white font-bold text-[18px] lg:text-[22px]">
-                Genres
-              </p>
-              <div className="w-full flex items-center gap-2 mt-2">
-                {detailsData.genres &&
-                  detailsData.genres.map((genre) => (
-                    <div
-                      key={genre.id}
-                      className="w-fit px-2 py-1 bg-white rounded-lg"
-                    >
-                      {genre.name}
-                    </div>
-                  ))}
-              </div>
-              <p className="text-white font-bold mt-9 text-[18px] lg:text-[22px]">
-                Synopsis
-              </p>
-              <p className="w-full mt-2 text-[16px] lg:text-[20px] text-gray-400">
-                {detailsData.overview && detailsData.overview}
+          <div className="w-full flex items-start justify-between mt-9">
+            <div className="flex flex-col items-center gap-y-1">
+              <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
+                Length
+              </h2>
+              <p className="text-white text-[16px] lg:text-[20px] font-normal">
+                {formattedRuntime}
               </p>
             </div>
+            <div className="flex flex-col items-center gap-y-1">
+              <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
+                Language
+              </h2>
+              <p className="text-white text-[16px] lg:text-[20px] font-normal uppercase">
+                {detailsData.original_language && detailsData.original_language}
+              </p>
+            </div>
+            <div className="flex flex-col items-center gap-y-1">
+              <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
+                Country
+              </h2>
+              <p className="text-white text-[16px] lg:text-[20px] font-normal">
+                {detailsData.origin_country && detailsData.origin_country[0]}
+              </p>
+            </div>
+            <div className="flex flex-col items-center gap-y-1">
+              <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
+                Status
+              </h2>
+              <p className="text-white text-[16px] lg:text-[20px] font-normal">
+                Released
+              </p>
+            </div>
+          </div>
+          <div className="w-full mt-9 flex flex-col justify-start items-start">
+            <p className=" text-white font-bold text-[18px] lg:text-[22px]">
+              Genres
+            </p>
+            <div className="w-full flex items-center gap-2 mt-2 flex-wrap">
+              {detailsData.genres &&
+                detailsData.genres.map((genre) => (
+                  <div
+                    key={genre.id}
+                    className="w-fit px-2 py-1 bg-white rounded-lg"
+                  >
+                    {genre.name}
+                  </div>
+                ))}
+            </div>
+            <p className="text-white font-bold mt-9 text-[18px] lg:text-[22px]">
+              Synopsis
+            </p>
+            <p className="w-full mt-2 text-[16px] lg:text-[20px] text-gray-400">
+              {detailsData.overview && detailsData.overview}
+            </p>
           </div>
         </div>
-        <section className="mt-9">
-          <div className="w-full flex items-center justify-between">
-            <h2 className="text-white font-semibold text-[18px] lg:text-[22px]">
-              Cast
-            </h2>
-            {castData.cast && castData.cast.length > 12 ? (
-              <p
-                onClick={toggleCastWindow}
-                className="text-white font-normal lg:cursor-pointer"
+      </div>
+      <section className="mt-9">
+        <div className="w-full flex items-center justify-between">
+          <h2 className="text-white font-semibold text-[18px] lg:text-[22px]">
+            Cast
+          </h2>
+          {castData.cast && castData.cast.length > 12 ? (
+            <p
+              onClick={toggleCastWindow}
+              className="text-white font-normal lg:cursor-pointer"
+            >
+              See More
+            </p>
+          ) : null}
+        </div>
+        <div className="flex mt-4 overflow-x-auto gap-x-4">
+          {castData.cast &&
+            castData.cast.slice(0, 8).map((castMember) => (
+              <div
+                key={castMember.id && castMember.id}
+                className="flex-shrink-0 w-[120px] mb-4 lg:w-[162px]"
               >
-                See More
-              </p>
-            ) : null}
-          </div>
-          <div className="flex mt-4 overflow-x-auto gap-x-4">
-            {castData.cast &&
-              castData.cast.slice(0, 8).map((castMember) => (
-                <div
-                  key={castMember.id && castMember.id}
-                  className="flex-shrink-0 w-[120px] mb-4 lg:w-[162px]"
-                >
-                  <div className="h-[180px] w-[120px] overflow-hidden rounded-lg lg:w-[162px]">
-                    <img
-                      src={
-                        castMember.profile_path !== null
-                          ? `https://image.tmdb.org/t/p/w500${castMember.profile_path}`
-                          : "/assets/images/mobile/unknown-cast-pfp.webp"
-                      }
-                      alt={castMember.name && castMember.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-white text-sm mt-2 lg:text-[20px]">
-                    {castMember.name && castMember.name}
-                  </p>
-                  <p className="text-gray-400 lg:text-[16px]">
-                    {castMember.character && castMember.character}
-                  </p>
+                <div className="h-[180px] w-[120px] overflow-hidden rounded-lg lg:w-[162px]">
+                  <img
+                    src={
+                      castMember.profile_path !== null
+                        ? `https://image.tmdb.org/t/p/w500${castMember.profile_path}`
+                        : "/assets/images/mobile/unknown-cast-pfp.webp"
+                    }
+                    alt={castMember.name && castMember.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              ))}
-          </div>
-        </section>
+                <p className="text-white text-sm mt-2 lg:text-[20px]">
+                  {castMember.name && castMember.name}
+                </p>
+                <p className="text-gray-400 lg:text-[16px]">
+                  {castMember.character && castMember.character}
+                </p>
+              </div>
+            ))}
+        </div>
+      </section>
 
-        <section className="mt-6">
-          {similarMoviesData.results && similarMoviesData.results.length > 0 ? (
-            <>
-              <h2 className="text-white font-semibold text-[18px]">
-                You may also like
-              </h2>
-              <div className="relative flex gap-x-4 overflow-x-scroll mt-4 md:gap-x-[2.5rem] gap-y-[2rem]">
-                {similarMoviesData.results &&
-                  similarMoviesData.results.slice(0, 8).map((movie, index) => (
-                    <Link
-                      key={index}
-                      to={`/${movie.id}/movie/${movie.title
-                        .split(" ")
-                        .join("-")}`}
-                    >
-                      <div className="relative w-full rounded-lg" key={index}>
-                        <div className="relative w-[240px] h-[140px] rounded-lg md:w-[470px] md:h-[230px] mb-4">
-                          <img
-                            src={
-                              movie.backdrop_path
-                                ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
-                                : "path/to/placeholder/image.jpg"
-                            }
-                            alt={movie.title}
-                            className="w-full h-full object-cover rounded-lg"
-                          />
-                          <div className="overlay absolute inset-0 bg-black rounded-lg bg-opacity-30"></div>
-                          <div className="absolute left-4 bottom-4 z-40 h-fit w-fit truncate text-ellipsis">
-                            <div className="mb-1 flex text-[11px] font-light items-center lg:text-[14px]">
-                              <p className="text-white">
-                                {movie.release_date &&
-                                  movie.release_date.substring(0, 4)}
-                              </p>
-                              <div className="bg-white rounded-full w-[2px] h-[2px] ml-2"></div>
-                              <svg
-                                className="ml-1"
-                                width="12"
-                                height="12"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M10.173 0H1.827A1.827 1.827 0 0 0 0 1.827v8.346C0 11.183.818 12 1.827 12h8.346A1.827 1.827 0 0 0 12 10.173V1.827A1.827 1.827 0 0 0 10.173 0ZM2.4 5.4H1.2V4.2h1.2v1.2ZM1.2 6.6h1.2v1.2H1.2V6.6Zm9.6-1.2H9.6V4.2h1.2v1.2ZM9.6 6.6h1.2v1.2H9.6V6.6Zm1.2-4.956V2.4H9.6V1.2h.756a.444.444 0 0 1 .444.444ZM1.644 1.2H2.4v1.2H1.2v-.756a.444.444 0 0 1 .444-.444ZM1.2 10.356V9.6h1.2v1.2h-.756a.444.444 0 0 1-.444-.444Zm9.6 0a.444.444 0 0 1-.444.444H9.6V9.6h1.2v.756Z"
-                                  fill="#FFF"
-                                  opacity=".75"
-                                />
-                              </svg>
-                              <p className="ml-2 capitalize text-white">
-                                {movie.media_type || "movie"}
-                              </p>
-                            </div>
-                            <p className="text-ellipsis w-[200px] truncate text-sm font-bold capitalize text-white lg:text-[20px]">
-                              {movie.title || movie.original_title}
+      <section className="mt-6">
+        {similarMoviesData.results && similarMoviesData.results.length > 0 ? (
+          <>
+            <h2 className="text-white font-semibold text-[18px]">
+              You may also like
+            </h2>
+            <div className="relative flex gap-x-4 overflow-x-scroll mt-4 md:gap-x-[2.5rem] gap-y-[2rem]">
+              {similarMoviesData.results &&
+                similarMoviesData.results.slice(0, 8).map((movie, index) => (
+                  <Link
+                    key={index}
+                    to={`/${movie.id}/movie/${movie.title
+                      .split(" ")
+                      .join("-")}`}
+                  >
+                    <div className="relative w-full rounded-lg" key={index}>
+                      <div className="relative w-[240px] h-[140px] rounded-lg md:w-[470px] md:h-[230px] mb-4">
+                        <img
+                          src={`https://image.tmdb.org/t/p/w500${
+                            movie.backdrop_path
+                              ? movie.backdrop_path
+                              : movie.poster_path
+                          }`}
+                          alt={movie.title}
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                        <div className="overlay absolute inset-0 bg-black rounded-lg bg-opacity-30"></div>
+                        <div className="absolute left-4 bottom-4 z-40 h-fit w-fit truncate text-ellipsis">
+                          <div className="mb-1 flex text-[11px] font-light items-center lg:text-[14px]">
+                            <p className="text-white">
+                              {movie.release_date &&
+                                movie.release_date.substring(0, 4)}
+                            </p>
+                            <div className="bg-white rounded-full w-[2px] h-[2px] ml-2"></div>
+                            <svg
+                              className="ml-1"
+                              width="12"
+                              height="12"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M10.173 0H1.827A1.827 1.827 0 0 0 0 1.827v8.346C0 11.183.818 12 1.827 12h8.346A1.827 1.827 0 0 0 12 10.173V1.827A1.827 1.827 0 0 0 10.173 0ZM2.4 5.4H1.2V4.2h1.2v1.2ZM1.2 6.6h1.2v1.2H1.2V6.6Zm9.6-1.2H9.6V4.2h1.2v1.2ZM9.6 6.6h1.2v1.2H9.6V6.6Zm1.2-4.956V2.4H9.6V1.2h.756a.444.444 0 0 1 .444.444ZM1.644 1.2H2.4v1.2H1.2v-.756a.444.444 0 0 1 .444-.444ZM1.2 10.356V9.6h1.2v1.2h-.756a.444.444 0 0 1-.444-.444Zm9.6 0a.444.444 0 0 1-.444.444H9.6V9.6h1.2v.756Z"
+                                fill="#FFF"
+                                opacity=".75"
+                              />
+                            </svg>
+                            <p className="ml-2 capitalize text-white">
+                              {movie.media_type || "movie"}
                             </p>
                           </div>
+                          <p className="text-ellipsis w-[200px] truncate text-sm font-bold capitalize text-white lg:text-[20px]">
+                            {movie.title || movie.original_title}
+                          </p>
                         </div>
                       </div>
-                    </Link>
-                  ))}
-              </div>
-            </>
-          ) : null}
-        </section>
-      </div>
+                    </div>
+                  </Link>
+                ))}
+            </div>
+          </>
+        ) : null}
+      </section>
 
       {isOpen ? (
         <div className="w-screen fixed bottom-[150px] left-0 z-100 px-4 overflow-y-scroll">

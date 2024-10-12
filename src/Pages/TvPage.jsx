@@ -130,13 +130,15 @@ function TvPage({ setMovieName, setFilmId }) {
                 detailsData.first_air_date.substring(0, 4)}
               )
             </h1>
-            <h1 className="text-gray-300 text-[18px] mt-4">
+            <h1 className="text-gray-300 text-[18px] mt-4 lg:text-[20px]">
               {detailsData.tagline && detailsData.tagline}
             </h1>
             <div className="flex items-center justify-center gap-5 mt-[40px]">
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-white text-[24px]">User Score</h2>
-                <h2 className="text-gray-300 text-[16px]">
+                <h2 className="text-white text-[24px] lg:text-[28px]">
+                  User Score
+                </h2>
+                <h2 className="text-gray-300 text-[16px] lg:text-[20px]">
                   ({detailsData.vote_count && detailsData.vote_count} voted)
                 </h2>
               </div>
@@ -163,43 +165,45 @@ function TvPage({ setMovieName, setFilmId }) {
             </div>
             <div className="w-full flex items-start justify-between mt-9">
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px]">
+                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
                   Length
                 </h2>
-                <p className="text-white text-[16px] font-normal">
+                <p className="text-white text-[16px] font-normal lg:text-[20px]">
                   {detailsData.episode_run_time &&
                     detailsData.episode_run_time[0]}{" "}
                   min
                 </p>
               </div>
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px]">
+                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
                   Language
                 </h2>
-                <p className="text-white text-[16px] font-normal uppercase">
+                <p className="text-white text-[16px] font-normal lg:text-[20px] uppercase">
                   {detailsData.original_language &&
                     detailsData.original_language}
                 </p>
               </div>
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px]">
+                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
                   Country
                 </h2>
-                <p className="text-white text-[16px] font-normal">
+                <p className="text-white text-[16px] font-normal lg:text-[20px]">
                   {detailsData.origin_country && detailsData.origin_country[0]}
                 </p>
               </div>
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px]">
+                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
                   Status
                 </h2>
-                <p className="text-white text-[16px] font-normal">
+                <p className="text-white text-[16px] font-normal lg:text-[20px]">
                   {(detailsData.status && detailsData.status) || "On Air"}
                 </p>
               </div>
             </div>
             <div className="w-full mt-9 flex flex-col justify-start items-start">
-              <p className=" text-white font-bold text-[18px]">Genres</p>
+              <p className=" text-white font-bold text-[18px] lg:text-[22px]">
+                Genres
+              </p>
               <div className="w-full flex items-center gap-2 mt-2">
                 {detailsData.genres &&
                   detailsData.genres.map((genre) => (
@@ -211,8 +215,10 @@ function TvPage({ setMovieName, setFilmId }) {
                     </div>
                   ))}
               </div>
-              <p className="text-white font-bold mt-9 text-[18px]">Synopsis</p>
-              <p className="w-full mt-2 text-[16px] text-white">
+              <p className="text-white font-bold mt-9 text-[18px] lg:text-[22px]">
+                Synopsis
+              </p>
+              <p className="w-full mt-2 text-[16px] text-gray-400 lg:text-[18px]">
                 {detailsData.overview && detailsData.overview}
               </p>
             </div>
@@ -220,9 +226,14 @@ function TvPage({ setMovieName, setFilmId }) {
         </div>
         <section className="mt-9">
           <div className="w-full flex items-center justify-between">
-            <h2 className="text-white font-semibold text-[18px]">Cast</h2>
+            <h2 className="text-white font-semibold text-[18px] lg:text-[22px]">
+              Cast
+            </h2>
             {castData.cast && castData.cast.length > 8 ? (
-              <p onClick={toggleCastWindow} className="text-white font-normal">
+              <p
+                onClick={toggleCastWindow}
+                className="text-white font-normal lg:cursor-pointer"
+              >
                 See More
               </p>
             ) : null}
@@ -232,9 +243,9 @@ function TvPage({ setMovieName, setFilmId }) {
               castData.cast.slice(0, 8).map((castMember) => (
                 <div
                   key={castMember.id && castMember.id}
-                  className="flex-shrink-0 w-[120px] mb-4"
+                  className="flex-shrink-0 w-[120px] mb-4 lg:w-[162px]"
                 >
-                  <div className="h-[180px] w-[120px] overflow-hidden rounded-lg">
+                  <div className="h-[180px] w-[120px] overflow-hidden rounded-lg lg:w-[162px]">
                     <img
                       src={
                         castMember.profile_path !== null
@@ -244,10 +255,10 @@ function TvPage({ setMovieName, setFilmId }) {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="text-white text-sm mt-2">
+                  <p className="text-white text-sm mt-2 lg:text-[20px]">
                     {castMember.name && castMember.name}
                   </p>
-                  <p className="text-gray-400 text-xs">
+                  <p className="text-gray-400 text-xs lg:text-[16px]">
                     {castMember.character && castMember.character}
                   </p>
                 </div>
@@ -270,11 +281,11 @@ function TvPage({ setMovieName, setFilmId }) {
                     <div className="relative w-full rounded-lg">
                       <div className="relative w-[240px] h-[140px] rounded-lg md:w-[470px] md:h-[230px]">
                         <img
-                          src={
+                          src={`https://image.tmdb.org/t/p/w500${
                             movie.backdrop_path
-                              ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
-                              : "none"
-                          }
+                              ? movie.backdrop_path
+                              : movie.poster_path
+                          }`}
                           className="w-full h-full object-cover rounded-lg"
                         />
                         <div className="overlay absolute inset-0 bg-black rounded-lg bg-opacity-30"></div>
@@ -321,7 +332,7 @@ function TvPage({ setMovieName, setFilmId }) {
             <div className="w-full pt-2 px-4 flex items-end justify-end">
               <FaWindowClose
                 onClick={() => setIsOpen(!isOpen)}
-                className="fill-red w-[30px] h-[30px]"
+                className="fill-red w-[30px] h-[30px] lg:cursor-pointer"
               />
             </div>
             {castData.cast &&
