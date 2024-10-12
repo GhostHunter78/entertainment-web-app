@@ -141,13 +141,15 @@ function MoviePage({ setMovieName, setFilmId }) {
                 detailsData.release_date.substring(0, 4)}
               )
             </h1>
-            <h1 className="text-gray-300 text-[18px] mt-4">
+            <h1 className="text-gray-300 text-[18px] mt-4 lg:text-[20px]">
               {detailsData.tagline && detailsData.tagline}
             </h1>
             <div className="flex items-center justify-center gap-5 mt-[40px]">
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-white text-[24px]">User Score</h2>
-                <h2 className="text-gray-300 text-[16px]">
+                <h2 className="text-white text-[24px] lg:text-[28px]">
+                  User Score
+                </h2>
+                <h2 className="text-gray-300 text-[16px] lg:text-[20px]">
                   ({detailsData.vote_count && detailsData.vote_count} voted)
                 </h2>
               </div>
@@ -174,39 +176,43 @@ function MoviePage({ setMovieName, setFilmId }) {
             </div>
             <div className="w-full flex items-start justify-between mt-9">
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px]">
+                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
                   Length
                 </h2>
-                <p className="text-white text-[16px] font-normal">
+                <p className="text-white text-[16px] lg:text-[20px] font-normal">
                   {formattedRuntime}
                 </p>
               </div>
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px]">
+                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
                   Language
                 </h2>
-                <p className="text-white text-[16px] font-normal uppercase">
+                <p className="text-white text-[16px] lg:text-[20px] font-normal uppercase">
                   {detailsData.original_language &&
                     detailsData.original_language}
                 </p>
               </div>
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px]">
+                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
                   Country
                 </h2>
-                <p className="text-white text-[16px] font-normal">
+                <p className="text-white text-[16px] lg:text-[20px] font-normal">
                   {detailsData.origin_country && detailsData.origin_country[0]}
                 </p>
               </div>
               <div className="flex flex-col items-center gap-y-1">
-                <h2 className="text-gray-400 font-semibold text-[18px]">
+                <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
                   Status
                 </h2>
-                <p className="text-white text-[16px] font-normal">Released</p>
+                <p className="text-white text-[16px] lg:text-[20px] font-normal">
+                  Released
+                </p>
               </div>
             </div>
             <div className="w-full mt-9 flex flex-col justify-start items-start">
-              <p className=" text-white font-bold text-[18px]">Genres</p>
+              <p className=" text-white font-bold text-[18px] lg:text-[22px]">
+                Genres
+              </p>
               <div className="w-full flex items-center gap-2 mt-2">
                 {detailsData.genres &&
                   detailsData.genres.map((genre) => (
@@ -218,8 +224,10 @@ function MoviePage({ setMovieName, setFilmId }) {
                     </div>
                   ))}
               </div>
-              <p className="text-white font-bold mt-9 text-[18px]">Synopsis</p>
-              <p className="w-full mt-2 text-[16px] text-white">
+              <p className="text-white font-bold mt-9 text-[18px] lg:text-[22px]">
+                Synopsis
+              </p>
+              <p className="w-full mt-2 text-[16px] lg:text-[20px] text-gray-400">
                 {detailsData.overview && detailsData.overview}
               </p>
             </div>
@@ -227,9 +235,14 @@ function MoviePage({ setMovieName, setFilmId }) {
         </div>
         <section className="mt-9">
           <div className="w-full flex items-center justify-between">
-            <h2 className="text-white font-semibold text-[18px]">Cast</h2>
+            <h2 className="text-white font-semibold text-[18px] lg:text-[22px]">
+              Cast
+            </h2>
             {castData.cast && castData.cast.length > 12 ? (
-              <p onClick={toggleCastWindow} className="text-white font-normal">
+              <p
+                onClick={toggleCastWindow}
+                className="text-white font-normal lg:cursor-pointer"
+              >
                 See More
               </p>
             ) : null}
@@ -239,9 +252,9 @@ function MoviePage({ setMovieName, setFilmId }) {
               castData.cast.slice(0, 8).map((castMember) => (
                 <div
                   key={castMember.id && castMember.id}
-                  className="flex-shrink-0 w-[120px] mb-4"
+                  className="flex-shrink-0 w-[120px] mb-4 lg:w-[162px]"
                 >
-                  <div className="h-[180px] w-[120px] overflow-hidden rounded-lg">
+                  <div className="h-[180px] w-[120px] overflow-hidden rounded-lg lg:w-[162px]">
                     <img
                       src={
                         castMember.profile_path !== null
@@ -252,10 +265,10 @@ function MoviePage({ setMovieName, setFilmId }) {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="text-white text-sm mt-2">
+                  <p className="text-white text-sm mt-2 lg:text-[20px]">
                     {castMember.name && castMember.name}
                   </p>
-                  <p className="text-gray-400 text-xs">
+                  <p className="text-gray-400 lg:text-[16px]">
                     {castMember.character && castMember.character}
                   </p>
                 </div>
@@ -330,7 +343,7 @@ function MoviePage({ setMovieName, setFilmId }) {
       {isOpen ? (
         <div className="w-screen fixed bottom-[150px] left-0 z-100 px-4 overflow-y-scroll">
           <div className="w-full bg-white rounded-lg md:w-[350px] ml-auto mr-auto">
-            <div className="w-full pt-2 px-4 flex items-end justify-end">
+            <div className="w-full pt-2 px-4 flex items-end justify-end lg:cursor-pointer">
               <FaWindowClose
                 onClick={() => setIsOpen(!isOpen)}
                 className="fill-red w-[30px] h-[30px]"

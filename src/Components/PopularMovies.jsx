@@ -71,15 +71,18 @@ function PopularMovies({
       </div>
       {popularData && (
         <>
-          <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 gap-y-[2rem] lg:grid-cols-4 lg:gap-8">
+          <section className="w-full grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 gap-y-[2rem] lg:grid-cols-4 lg:gap-8">
             {popularData.slice(0, 6).map((movie, index) => (
               <Link
+                className={`grid relative ${index >= 4 ? "lg:col-span-2" : ""}`}
                 key={index}
                 to={`/${movie.id}/movie/${movie.title.split(" ").join("-")}`}
               >
                 <div
                   key={index}
-                  className={`relative ${index >= 4 ? "lg:col-span-2" : ""}`}
+                  className={`grid relative ${
+                    index >= 4 ? "lg:col-span-2" : ""
+                  }`}
                 >
                   <div className="h-[133px] overflow-hidden rounded-lg lg:h-[180px]">
                     <img

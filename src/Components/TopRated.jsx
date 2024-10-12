@@ -44,6 +44,7 @@ function TopRated({ currentPathName, currentPage, movieOrTv }) {
           <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 gap-y-[2rem] lg:grid-cols-4 lg:gap-8">
             {topRatedData.slice(0, 6).map((movie, index) => (
               <Link
+                className={`grid relative ${index >= 4 ? "lg:col-span-2" : ""}`}
                 key={index}
                 to={`/${movie.id}/movie/${movie.title.split(" ").join("-")}`}
               >

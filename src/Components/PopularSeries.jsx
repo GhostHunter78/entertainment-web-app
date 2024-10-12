@@ -60,6 +60,7 @@ function PopularSeries({
             {popularData.slice(0, 6).map((series, index) => (
               <Link
                 key={index}
+                className={`relative ${index >= 4 ? "lg:col-span-2" : ""}`}
                 to={`/${series.id}/tv/${series.name.split(" ").join("-")}`}
               >
                 <div
