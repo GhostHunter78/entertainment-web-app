@@ -14,6 +14,7 @@ import MoviesByGenre from "./Pages/MoviesByGenres";
 import SeriesByGenre from "./Pages/SeriesByGenres";
 import MoviePage from "./Pages/MoviePage";
 import TvPage from "./Pages/TvPage";
+import SearchResults from "./Pages/SearchResults";
 
 // Layout component to render the Header and Footer
 const Layout = () => {
@@ -141,6 +142,10 @@ const App = () => {
               filmId={filmId}
             />
           ),
+        },
+        {
+          path: `search-results`,
+          element: <SearchResults />,
         },
       ],
     },
