@@ -109,7 +109,7 @@ function MoviePage({ setMovieName, setFilmId }) {
 
   return (
     <div
-      className="mt-6 w-screen px-4 md:px-8 lg:pr-[90px] lg:pl-[160px]"
+      className="relative z-10 mt-6 w-screen px-4 md:px-8 lg:pr-[90px] lg:pl-[160px]"
       style={
         isOpen
           ? { filter: "blur(5px)", transition: "filter 0.3s ease-in-out" }
@@ -277,7 +277,7 @@ function MoviePage({ setMovieName, setFilmId }) {
       <section className="mt-6">
         {similarMoviesData.results && similarMoviesData.results.length > 0 ? (
           <>
-            <h2 className="text-white font-semibold text-[18px]">
+            <h2 className="text-white font-semibold text-[18px] lg:text-[22px]">
               You may also like
             </h2>
             <div className="relative flex gap-x-4 overflow-x-scroll mt-4 md:gap-x-[2.5rem] gap-y-[2rem]">
@@ -338,12 +338,12 @@ function MoviePage({ setMovieName, setFilmId }) {
       </section>
 
       {isOpen ? (
-        <div className="w-screen fixed bottom-[150px] left-0 z-100 px-4 overflow-y-scroll">
-          <div className="w-full bg-white rounded-lg md:w-[350px] ml-auto mr-auto">
-            <div className="w-full pt-2 px-4 flex items-end justify-end lg:cursor-pointer">
+        <div className="w-screen fixed bottom-[150px] left-0 px-4 overflow-y-scroll">
+          <div className="w-full z-50 bg-white rounded-lg md:w-[350px] ml-auto mr-auto">
+            <div className="w-full pt-2 px-4 flex items-end justify-end">
               <FaWindowClose
                 onClick={() => setIsOpen(!isOpen)}
-                className="fill-red w-[30px] h-[30px]"
+                className="fill-red w-[30px] h-[30px] lg:cursor-pointer"
               />
             </div>
             {castData.cast &&

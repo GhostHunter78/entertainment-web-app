@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { SearchField } from "../Components";
 import { ImArrowLeft2 } from "react-icons/im";
 import { ImArrowRight2 } from "react-icons/im";
+import { FaAngleDown } from "react-icons/fa6";
+import { FaChevronUp } from "react-icons/fa";
 
 function SearchResults({ currentPage, setCurrentPage }) {
+  const [filterArrowUp, setFilterArrowUp] = useState(false);
+  const [sortArrowUp, setSortArrowUp] = useState(false);
+
   const { currentPage: pageParam } = useParams();
   const navigate = useNavigate();
 
@@ -67,13 +72,126 @@ function SearchResults({ currentPage, setCurrentPage }) {
     }
   }, [query, currentPage]);
 
+  const toggleFilterArrow = () => {
+    setFilterArrowUp((prev) => !prev);
+    setSortArrowUp(false);
+  };
+
+  const toggleSortArrow = () => {
+    setSortArrowUp((prev) => !prev);
+    setFilterArrowUp(false);
+  };
+
   return (
     <div className="w-screen text-white lg:pr-[90px] lg:pl-[160px]">
       <SearchField />
       <div className="px-4 md:px-8">
-        <h1 className="mb-9">
+        <h1 className="mt-[10px] md:text-[18px] lg:text-[22px]">
           Found {data.total_results} Results for "{query}"
         </h1>
+        <section className="w-full flex items-start justify-between mt-6 mb-4 relative">
+          {/* Filter Section */}
+          <div className="flex flex-col items-start gap-y-4">
+            <div
+              className="relative flex items-center gap-2 cursor-pointer"
+              onClick={toggleFilterArrow}
+            >
+              <h2>Filter By</h2>
+              <FaAngleDown
+                className={`transition-transform duration-700 ${
+                  filterArrowUp ? "rotate-180" : ""
+                }`}
+              />
+            </div>
+            <div
+              className={`${
+                filterArrowUp ? "filter-box-visible" : "filter-box"
+              } p-4 bg-white rounded-lg duration-700`}
+            >
+              <div className="flex gap-[0.81rem]">
+                <input
+                  type="checkbox"
+                  className="accent-[#d63f3f] cursor-pointer"
+                  value="All"
+                ></input>
+                <span className="text-black text-[0.9375rem] font-bold">
+                  All
+                </span>
+              </div>
+              <div className="flex gap-[0.81rem]">
+                <input
+                  type="checkbox"
+                  className="accent-[#d63f3f] cursor-pointer"
+                  value="movie"
+                ></input>
+                <span className="text-black text-[0.9375rem] font-bold">
+                  Movies
+                </span>
+              </div>
+              <div className="flex gap-[0.81rem]">
+                <input
+                  type="checkbox"
+                  className="accent-[#d63f3f] cursor-pointer"
+                  value="tv"
+                ></input>
+                <span className="text-black text-[0.9375rem] font-bold">
+                  TV Shows
+                </span>
+              </div>
+              <div className="flex gap-[0.81rem]">
+                <input
+                  type="checkbox"
+                  className="accent-[#d63f3f] cursor-pointer"
+                  value="usa"
+                ></input>
+                <span className="text-black text-[0.9375rem] font-bold">
+                  Hollywood (USA)
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Sort Section */}
+          <div>
+            <div
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={toggleSortArrow}
+            >
+              <h2>Sort By</h2>
+              <FaAngleDown
+                className={`transition-transform duration-700 ${
+                  sortArrowUp ? "rotate-180" : ""
+                }`}
+              />
+            </div>
+            <div
+              className={`${
+                sortArrowUp ? "sort-box-visible" : "sort-box"
+              } p-4 bg-white rounded-lg duration-700`}
+            >
+              <div className="flex gap-[0.81rem]">
+                <input
+                  type="checkbox"
+                  className="accent-[#d63f3f] cursor-pointer"
+                  value="release_date"
+                ></input>
+                <span className="text-black text-[0.9375rem] font-bold">
+                  Release Date
+                </span>
+              </div>
+              <div className="flex gap-[0.81rem]">
+                <input
+                  type="checkbox"
+                  className="accent-[#d63f3f] cursor-pointer"
+                  value="popularity"
+                ></input>
+                <span className="text-black text-[0.9375rem] font-bold">
+                  Popularity
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
         <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 lg:grid-cols-4 lg:gap-8">
           {results.length > 0 ? (
             results.map((movie) => (

@@ -14,6 +14,12 @@ function SearchField() {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch(e);
+    }
+  };
+
   return (
     <div className="w-full flex items-baseline justify-between pr-4">
       <div className="w-full grid relative mt-6 cursor-pointer">
@@ -24,6 +30,7 @@ function SearchField() {
           placeholder="Search for movies or TV series"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <label className="absolute grid place-items-center top-[-2px] bottom-0">
           <button
