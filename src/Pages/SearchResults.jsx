@@ -9,6 +9,7 @@ import { FaChevronUp } from "react-icons/fa";
 function SearchResults({ currentPage, setCurrentPage }) {
   const [filterArrowUp, setFilterArrowUp] = useState(false);
   const [sortArrowUp, setSortArrowUp] = useState(false);
+  const [filter, setFilter] = useState("All");
 
   const { currentPage: pageParam } = useParams();
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ function SearchResults({ currentPage, setCurrentPage }) {
   }, [pageParam, setCurrentPage]);
 
   const [results, setResults] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
   const [data, setData] = useState({});
   const location = useLocation();
 
@@ -82,6 +84,28 @@ function SearchResults({ currentPage, setCurrentPage }) {
     setFilterArrowUp(false);
   };
 
+  useEffect(() => {
+    let filtered = results;
+
+    if (filter === "Movies") {
+      filtered = results.filter((item) => item.media_type === "movie");
+    } else if (filter === "TV Shows") {
+      filtered = results.filter((item) => item.media_type === "tv");
+    } else if (filter === "Hollywood (USA)") {
+      filtered = results.filter(
+        (item) =>
+          item.origin_country?.[0] === "US" || item.original_language === "en"
+      );
+    }
+
+    setFilteredResults(filtered);
+  }, [filter, results]);
+
+  const handleFilterChange = (selectedFilter) => {
+    setFilter(selectedFilter);
+    setFilterArrowUp(false); // Close the filter box
+  };
+
   return (
     <div className="w-screen text-white lg:pr-[90px] lg:pl-[160px]">
       <SearchField />
@@ -110,9 +134,11 @@ function SearchResults({ currentPage, setCurrentPage }) {
             >
               <div className="flex gap-[0.81rem]">
                 <input
-                  type="checkbox"
+                  type="radio"
+                  name="filter"
                   className="accent-[#d63f3f] cursor-pointer"
-                  value="All"
+                  checked={filter === "All"}
+                  onChange={() => handleFilterChange("All")}
                 ></input>
                 <span className="text-black text-[0.9375rem] font-bold">
                   All
@@ -120,9 +146,11 @@ function SearchResults({ currentPage, setCurrentPage }) {
               </div>
               <div className="flex gap-[0.81rem]">
                 <input
-                  type="checkbox"
+                  type="radio"
+                  name="filter"
                   className="accent-[#d63f3f] cursor-pointer"
-                  value="movie"
+                  checked={filter === "Movies"}
+                  onChange={() => handleFilterChange("Movies")}
                 ></input>
                 <span className="text-black text-[0.9375rem] font-bold">
                   Movies
@@ -130,9 +158,11 @@ function SearchResults({ currentPage, setCurrentPage }) {
               </div>
               <div className="flex gap-[0.81rem]">
                 <input
-                  type="checkbox"
+                  type="radio"
+                  name="filter"
                   className="accent-[#d63f3f] cursor-pointer"
-                  value="tv"
+                  checked={filter === "TV Shows"}
+                  onChange={() => handleFilterChange("TV Shows")}
                 ></input>
                 <span className="text-black text-[0.9375rem] font-bold">
                   TV Shows
@@ -140,9 +170,11 @@ function SearchResults({ currentPage, setCurrentPage }) {
               </div>
               <div className="flex gap-[0.81rem]">
                 <input
-                  type="checkbox"
+                  type="radio"
+                  name="filter"
                   className="accent-[#d63f3f] cursor-pointer"
-                  value="usa"
+                  checked={filter === "Hollywood (USA)"}
+                  onChange={() => handleFilterChange("Hollywood (USA)")}
                 ></input>
                 <span className="text-black text-[0.9375rem] font-bold">
                   Hollywood (USA)
@@ -171,7 +203,7 @@ function SearchResults({ currentPage, setCurrentPage }) {
             >
               <div className="flex gap-[0.81rem]">
                 <input
-                  type="checkbox"
+                  type="radio"
                   className="accent-[#d63f3f] cursor-pointer"
                   value="release_date"
                 ></input>
@@ -181,7 +213,7 @@ function SearchResults({ currentPage, setCurrentPage }) {
               </div>
               <div className="flex gap-[0.81rem]">
                 <input
-                  type="checkbox"
+                  type="radio"
                   className="accent-[#d63f3f] cursor-pointer"
                   value="popularity"
                 ></input>
@@ -193,17 +225,13 @@ function SearchResults({ currentPage, setCurrentPage }) {
           </div>
         </section>
         <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 lg:grid-cols-4 lg:gap-8">
-          {results.length > 0 ? (
-            results.map((movie) => (
+          {filteredResults.length > 0 ? (
+            filteredResults.map((movie) => (
               <Link
                 key={movie.id}
                 to={`/${movie.id}/${
                   movie.media_type === "movie" ? "movie" : "tv"
-                }/${
-                  movie.media_type === "movie"
-                    ? movie.title
-                    : movie.name.split(" ").join("-")
-                }`}
+                }/${movie.media_type === "movie" ? movie.title : movie.name}`}
               >
                 <div key={movie.id} className="relative">
                   <div className="h-[133px] overflow-hidden rounded-lg lg:h-[180px]">
