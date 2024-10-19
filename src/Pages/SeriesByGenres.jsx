@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ImArrowLeft2, ImArrowRight2 } from "react-icons/im";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { SearchField } from "../Components";
+import SearchTvField from "../Components/SearchTvField";
 
 function SeriesByGenre({ currentPage, setCurrentPage }) {
   const { genreId } = useParams();
@@ -164,7 +165,7 @@ function SeriesByGenre({ currentPage, setCurrentPage }) {
 
   return (
     <div className="w-screen text-white lg:pr-[90px] lg:pl-[160px]">
-      <SearchField />
+      <SearchTvField />
       <div className="w-full text-white mt-[1.5rem] px-4 md:px-8">
         <h1 className="text-left text-3xl">{genreName}</h1>
         <div className="flex flex-col grid-cols-1 sm:grid-cols-3 gap-4 mt-4">

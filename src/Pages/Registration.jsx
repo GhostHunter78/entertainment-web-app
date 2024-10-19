@@ -78,7 +78,7 @@ const Registration = () => {
             </button>
           </form>
         </div>
-        <Link to={"/"}>
+        <Link to={"/login"}>
           <p className="mt-6 text-white text-[14px] font-extralight outfit">
             Already have an account? <span className="text-red">Login</span>
           </p>

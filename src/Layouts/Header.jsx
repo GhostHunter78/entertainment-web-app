@@ -14,11 +14,11 @@ const Header = () => {
   return (
     <>
       <div className="w-screen bg-blue px-4 py-4 flex items-center justify-between md:px-8 lg:fixed lg:z-50 lg:flex-col lg:left-8 lg:top-[9%] lg:w-fit lg:rounded-lg lg:gap-y-[100px] lg:px-[18px] lg:py-[25px] lg:h-[83%]">
-        <Link to={"/home"}>
+        <Link to={"/"}>
           <Logo />
         </Link>
         <div className="flex items-center gap-6 md:gap-[5.5rem] lg:flex-col lg:gap-y-[50px]">
-          <Link to={"/home"}>
+          <Link to={"/"}>
             <IconHome activePage={currentPage} />
           </Link>
           <Link to={"/movie-genres"}>

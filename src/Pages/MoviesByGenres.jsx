@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ImArrowLeft2, ImArrowRight2 } from "react-icons/im";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { SearchField } from "../Components";
+import SearchMoviesField from "../Components/SearchMoviesField";
 
 function MoviesByGenre({ currentPage, setCurrentPage }) {
   const { genreId } = useParams();
@@ -168,17 +169,17 @@ function MoviesByGenre({ currentPage, setCurrentPage }) {
     fetchMoviesByGenre();
   }, [genreId, currentPage]);
 
-  const { pathname } = useLocation(); // Gets the current route
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scrolls to the top of the page
-  }, [pathname]); // Runs whenever the route changes
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <div className="w-screen text-white lg:pr-[90px] lg:pl-[160px]">
-      <SearchField />
+      <SearchMoviesField />
       <div className="w-full text-white px-4 mt-[1.5rem] md:px-8">
         <h1 className="text-left text-3xl lg:text-[32px]">{genreName}</h1>
         <div className="flex flex-col grid-cols-1 sm:grid-cols-3 gap-4 mt-4">

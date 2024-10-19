@@ -1,14 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { SearchField } from "../Components";
 import { ImArrowLeft2 } from "react-icons/im";
 import { ImArrowRight2 } from "react-icons/im";
-import { FaAngleDown } from "react-icons/fa6";
+import SearchMoviesField from "../Components/SearchMoviesField";
 
-function SearchResults({ currentPage, setCurrentPage }) {
-  const [filterArrowUp, setFilterArrowUp] = useState(false);
-  const [filter, setFilter] = useState("All");
-
+function SearchedMoviesResults({ currentPage, setCurrentPage }) {
   const { currentPage: pageParam } = useParams();
   const navigate = useNavigate();
 
@@ -25,14 +21,14 @@ function SearchResults({ currentPage, setCurrentPage }) {
     const nextPage =
       parseInt(currentPage, 10) < 500 ? parseInt(currentPage, 10) + 1 : 500;
     setCurrentPage(nextPage);
-    navigate(`/search-results?query=${query}&page=${nextPage}`);
+    navigate(`/search-movies-results?query=${query}&page=${nextPage}`);
   };
 
   const handlePrevButtonClick = () => {
     const prevPage =
       parseInt(currentPage, 10) > 1 ? parseInt(currentPage, 10) - 1 : 1;
     setCurrentPage(prevPage);
-    navigate(`/search-results?query=${query}&page=${prevPage}`);
+    navigate(`/search-movies-results?query=${query}&page=${prevPage}`);
   };
 
   useEffect(() => {
@@ -40,7 +36,6 @@ function SearchResults({ currentPage, setCurrentPage }) {
   }, [pageParam, setCurrentPage]);
 
   const [results, setResults] = useState([]);
-  const [filteredResults, setFilteredResults] = useState([]);
   const [data, setData] = useState({});
   const location = useLocation();
 
@@ -58,7 +53,7 @@ function SearchResults({ currentPage, setCurrentPage }) {
       };
 
       fetch(
-        `https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=${currentPage}`,
+        `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${currentPage}`,
         options
       )
         .then((response) => response.json())
@@ -72,117 +67,31 @@ function SearchResults({ currentPage, setCurrentPage }) {
     }
   }, [query, currentPage]);
 
-  const toggleFilterArrow = () => {
-    setFilterArrowUp((prev) => !prev);
-  };
-
-  useEffect(() => {
-    let filtered = results;
-
-    if (filter === "Movies") {
-      filtered = results.filter((item) => item.media_type === "movie");
-    } else if (filter === "TV Shows") {
-      filtered = results.filter((item) => item.media_type === "tv");
-    } else if (filter === "Hollywood (USA)") {
-      filtered = results.filter(
-        (item) =>
-          item.origin_country?.[0] === "US" || item.original_language === "en"
-      );
-    }
-
-    setFilteredResults(filtered);
-  }, [filter, results]);
-
-  const handleFilterChange = (selectedFilter) => {
-    setFilter(selectedFilter);
-    setFilterArrowUp(false);
+  const handleGoBack = () => {
+    navigate(-1);
   };
 
   return (
     <div className="w-screen text-white lg:pr-[90px] lg:pl-[160px]">
-      <SearchField />
+      <SearchMoviesField />
+      <div
+        className="w-fit pl-[15px] flex items-center gap-2 lg:cursor-pointer mt-5 mb-4"
+        onClick={handleGoBack}
+      >
+        <FaArrowLeft className="fill-red" />
+        <p className="text-red ">Go Back</p>
+      </div>
       <div className="px-4 md:px-8">
         <h1 className="mt-[10px] md:text-[18px] lg:text-[22px]">
           Found {data.total_results} Results for "{query}"
         </h1>
-        <section className="w-full flex items-start justify-between mt-6 mb-4 relative">
-          {/* Filter Section */}
-          <div className="flex flex-col items-start gap-y-4">
-            <div
-              className="relative flex items-center gap-2 cursor-pointer"
-              onClick={toggleFilterArrow}
-            >
-              <h2>Filter By</h2>
-              <FaAngleDown
-                className={`transition-transform duration-700 ${
-                  filterArrowUp ? "rotate-180" : ""
-                }`}
-              />
-            </div>
-            <div
-              className={`${
-                filterArrowUp ? "filter-box-visible" : "filter-box"
-              } p-4 bg-white rounded-lg duration-700`}
-            >
-              <div className="flex items-center gap-[0.81rem]">
-                <input
-                  type="radio"
-                  name="filter"
-                  className="accent-[#d63f3f] cursor-pointer"
-                  checked={filter === "All"}
-                  onChange={() => handleFilterChange("All")}
-                ></input>
-                <span className="text-black text-[0.9375rem] font-bold">
-                  All
-                </span>
-              </div>
-              <div className="flex items-center gap-[0.81rem]">
-                <input
-                  type="radio"
-                  name="filter"
-                  className="accent-[#d63f3f] cursor-pointer"
-                  checked={filter === "Movies"}
-                  onChange={() => handleFilterChange("Movies")}
-                ></input>
-                <span className="text-black text-[0.9375rem] font-bold">
-                  Movies
-                </span>
-              </div>
-              <div className="flex items-center gap-[0.81rem]">
-                <input
-                  type="radio"
-                  name="filter"
-                  className="accent-[#d63f3f] cursor-pointer"
-                  checked={filter === "TV Shows"}
-                  onChange={() => handleFilterChange("TV Shows")}
-                ></input>
-                <span className="text-black text-[0.9375rem] font-bold">
-                  TV Shows
-                </span>
-              </div>
-              <div className="flex items-center gap-[0.81rem]">
-                <input
-                  type="radio"
-                  name="filter"
-                  className="accent-[#d63f3f] cursor-pointer"
-                  checked={filter === "Hollywood (USA)"}
-                  onChange={() => handleFilterChange("Hollywood (USA)")}
-                ></input>
-                <span className="text-black text-[0.9375rem] font-bold">
-                  Hollywood (USA)
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
         <section className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 lg:grid-cols-4 lg:gap-8">
-          {filteredResults.length > 0 ? (
-            filteredResults.map((movie) => (
+          {results.length > 0 ? (
+            results.map((movie) => (
               <Link
                 key={movie.id}
-                to={`/${movie.id}/${
-                  movie.media_type === "movie" ? "movie" : "tv"
-                }/${movie.media_type === "movie" ? movie.title : movie.name}`}
+                to={`/${movie.id}/movie
+                }/${movie.title}`}
               >
                 <div key={movie.id} className="relative">
                   <div className="h-[133px] overflow-hidden rounded-lg lg:h-[180px]">
@@ -192,17 +101,15 @@ function SearchResults({ currentPage, setCurrentPage }) {
                           ? movie.backdrop_path
                           : movie.poster_path
                       }`}
-                      alt={`Unable loading poster ;(`}
+                      alt={`Unable loading poster 😕`}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="mt-2 w-full">
                     <div className="mb-1 flex text-[11px] font-light items-center lg:text-[14px]">
                       <p>
-                        {(movie.release_date &&
-                          movie.release_date.substring(0, 4)) ||
-                          (movie.first_air_date &&
-                            movie.first_air_date.substring(0, 4))}
+                        {movie.release_date &&
+                          movie.release_date.substring(0, 4)}
                       </p>
                       <div className="bg-white rounded-full w-[2px] h-[2px] ml-2"></div>
                       <svg
@@ -217,12 +124,10 @@ function SearchResults({ currentPage, setCurrentPage }) {
                           opacity=".75"
                         />
                       </svg>
-                      <p className="ml-2 capitalize">
-                        {movie.media_type === "movie" ? "Movie" : "TV"}
-                      </p>
+                      <p className="ml-2 capitalize">Movie</p>
                     </div>
                     <p className="text-ellips w-[160px] truncate text-sm font-bold capitalize text-white lg:text-[20px]">
-                      {movie.media_type === "movie" ? movie.title : movie.name}
+                      {movie.title}
                     </p>
                   </div>
                 </div>
@@ -256,4 +161,4 @@ function SearchResults({ currentPage, setCurrentPage }) {
   );
 }
 
-export default SearchResults;
+export default SearchedMoviesResults;

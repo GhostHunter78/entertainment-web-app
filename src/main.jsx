@@ -15,6 +15,8 @@ import SeriesByGenre from "./Pages/SeriesByGenres";
 import MoviePage from "./Pages/MoviePage";
 import TvPage from "./Pages/TvPage";
 import SearchResults from "./Pages/SearchResults";
+import SearchedMoviesResults from "./Pages/SearchedMoviesResults";
+import SearchedTvResults from "./Pages/SerachedTvResults";
 
 // Layout component to render the Header and Footer
 const Layout = () => {
@@ -49,10 +51,10 @@ const App = () => {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "/", element: <Login /> },
+        { path: "login", element: <Login /> },
         { path: "registration", element: <Registration /> },
         {
-          path: "home",
+          path: "/",
           element: (
             <Home
               currentPage={currentPage}
@@ -147,6 +149,24 @@ const App = () => {
           path: `search-results`,
           element: (
             <SearchResults
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          ),
+        },
+        {
+          path: `search-movies-results`,
+          element: (
+            <SearchedMoviesResults
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          ),
+        },
+        {
+          path: `search-tv-results`,
+          element: (
+            <SearchedTvResults
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />
