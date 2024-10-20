@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { ImArrowLeft2 } from "react-icons/im";
 import { ImArrowRight2 } from "react-icons/im";
 import SearchMoviesField from "../Components/SearchMoviesField";
+import { FaArrowLeft } from "react-icons/fa";
 
 function SearchedMoviesResults({ currentPage, setCurrentPage }) {
   const { currentPage: pageParam } = useParams();
@@ -58,8 +59,6 @@ function SearchedMoviesResults({ currentPage, setCurrentPage }) {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log("Response:", data);
-          console.log("Results:", data.results);
           setResults(data.results);
           setData(data);
         })

@@ -60,8 +60,6 @@ function SearchedTvResults({ currentPage, setCurrentPage }) {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log("Response:", data);
-          console.log("Results:", data.results);
           setResults(data.results);
           setData(data);
         })

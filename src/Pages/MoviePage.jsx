@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaWindowClose } from "react-icons/fa";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 function MoviePage({ setMovieName, setFilmId }) {
   const { filmId, movieName } = useParams();
-
   const [detailsData, setDetailsData] = useState({});
   const [castData, setCastData] = useState({});
   const [similarMoviesData, setSimilarMoviesData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleCastWindow = () => {
     setIsOpen(!isOpen);
@@ -33,6 +34,7 @@ function MoviePage({ setMovieName, setFilmId }) {
   }, [pathname]);
 
   const getMovieCast = async () => {
+    setIsLoading(true);
     const options = {
       method: "GET",
       headers: {
@@ -48,10 +50,12 @@ function MoviePage({ setMovieName, setFilmId }) {
     )
       .then((response) => response.json())
       .then((response) => setCastData(response))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(setIsLoading(false));
   };
 
   const getMovieDetails = async () => {
+    setIsLoading(true);
     const options = {
       method: "GET",
       headers: {
@@ -67,10 +71,12 @@ function MoviePage({ setMovieName, setFilmId }) {
     )
       .then((response) => response.json())
       .then((response) => setDetailsData(response))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(setIsLoading(false));
   };
 
   const getSimilarMovies = async () => {
+    setIsLoading(true);
     const options = {
       method: "GET",
       headers: {
@@ -86,10 +92,9 @@ function MoviePage({ setMovieName, setFilmId }) {
     )
       .then((response) => response.json())
       .then((response) => setSimilarMoviesData(response))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(setIsLoading(false));
   };
-
-  console.log(castData);
 
   useEffect(() => {
     getMovieDetails();
@@ -129,115 +134,129 @@ function MoviePage({ setMovieName, setFilmId }) {
         <FaArrowLeft className="fill-red" />
         <p className="text-red ">Go Back</p>
       </div>
-      <div className="w-full flex flex-col items-center justify-center mt-[30px] md:flex-row md:items-start md:gap-[40px] lg:gap-[100px]">
-        <img
-          className="w-[85%] max-w-[400px] rounded-[25px] md:w-fit md:max-w-[300px] lg:max-w-[400px]"
-          src={`https://image.tmdb.org/t/p/w500${
-            detailsData.poster_path && detailsData.poster_path
-          }`}
-          alt={detailsData.title || "Movie Poster"}
-        />
-        <div className="w-full md:flex md:flex-col md:items-start">
-          <h1 className="text-white text-[28px] mt-5 font-bold md:mt-0">
-            {detailsData.title && detailsData.title}
-          </h1>
-          <h1 className="text-white text-[28px] font-bold">
-            (
-            {detailsData.release_date &&
-              detailsData.release_date.substring(0, 4)}
-            )
-          </h1>
-          <h1 className="text-gray-300 text-[18px] mt-4 lg:text-[20px]">
-            {detailsData.tagline && detailsData.tagline}
-          </h1>
-          <div className="flex items-center justify-center gap-5 mt-[40px]">
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-white text-[24px] lg:text-[28px]">
-                User Score
-              </h2>
-              <h2 className="text-gray-300 text-[16px] lg:text-[20px]">
-                ({detailsData.vote_count && detailsData.vote_count} voted)
-              </h2>
-            </div>
-            <div className="circular-progress-wrapper">
-              <svg className="circular-progress" viewBox="0 0 36 36">
-                <path
-                  className="circle-bg"
-                  d="M18 2.0845
-         a 15.9155 15.9155 0 0 1 0 31.831
-         a 15.9155 15.9155 0 0 1 0 -31.831"
-                />
-                <path
-                  className="circle"
-                  strokeDasharray={`${ratingPercentage}, 100`}
-                  d="M18 2.0845
-         a 15.9155 15.9155 0 0 1 0 31.831
-         a 15.9155 15.9155 0 0 1 0 -31.831"
-                />
-                <text x="18" y="20.35" className="percentage-text">
-                  {ratingPercentage}%
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div className="w-full flex items-start justify-between mt-9">
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
-                Length
-              </h2>
-              <p className="text-white text-[16px] lg:text-[20px] font-normal">
-                {formattedRuntime}
-              </p>
-            </div>
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
-                Language
-              </h2>
-              <p className="text-white text-[16px] lg:text-[20px] font-normal uppercase">
-                {detailsData.original_language && detailsData.original_language}
-              </p>
-            </div>
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
-                Country
-              </h2>
-              <p className="text-white text-[16px] lg:text-[20px] font-normal">
-                {detailsData.origin_country && detailsData.origin_country[0]}
-              </p>
-            </div>
-            <div className="flex flex-col items-center gap-y-1">
-              <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
-                Status
-              </h2>
-              <p className="text-white text-[16px] lg:text-[20px] font-normal">
-                Released
-              </p>
-            </div>
-          </div>
-          <div className="w-full mt-9 flex flex-col justify-start items-start">
-            <p className=" text-white font-bold text-[18px] lg:text-[22px]">
-              Genres
-            </p>
-            <div className="w-full flex items-center gap-2 mt-2 flex-wrap">
-              {detailsData.genres &&
-                detailsData.genres.map((genre) => (
-                  <div
-                    key={genre.id}
-                    className="w-fit px-2 py-1 bg-white rounded-lg"
-                  >
-                    {genre.name}
-                  </div>
-                ))}
-            </div>
-            <p className="text-white font-bold mt-9 text-[18px] lg:text-[22px]">
-              Synopsis
-            </p>
-            <p className="w-full mt-2 text-[16px] lg:text-[20px] text-gray-400">
-              {detailsData.overview && detailsData.overview}
-            </p>
-          </div>
+      {isLoading ? (
+        <div className="flex justify-center items-center mt-10">
+          <DotLottieReact
+            src="https://lottie.host/67cc73e4-f79a-4970-9a67-7d099ddda083/GPAkHVF4sd.json"
+            loop
+            autoplay
+          />
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="w-full flex flex-col items-center justify-center mt-[30px] md:flex-row md:items-start md:gap-[40px] lg:gap-[100px]">
+            <img
+              className="w-[85%] max-w-[400px] rounded-[25px] md:w-fit md:max-w-[300px] lg:max-w-[400px]"
+              src={`https://image.tmdb.org/t/p/w500${
+                detailsData.poster_path && detailsData.poster_path
+              }`}
+              alt={detailsData.title || "Movie Poster"}
+            />
+            <div className="w-full md:flex md:flex-col md:items-start">
+              <h1 className="text-white text-[28px] mt-5 font-bold md:mt-0">
+                {detailsData.title && detailsData.title}
+              </h1>
+              <h1 className="text-white text-[28px] font-bold">
+                (
+                {detailsData.release_date &&
+                  detailsData.release_date.substring(0, 4)}
+                )
+              </h1>
+              <h1 className="text-gray-300 text-[18px] mt-4 lg:text-[20px]">
+                {detailsData.tagline && detailsData.tagline}
+              </h1>
+              <div className="flex items-center justify-center gap-5 mt-[40px]">
+                <div className="flex flex-col items-center gap-y-1">
+                  <h2 className="text-white text-[24px] lg:text-[28px]">
+                    User Score
+                  </h2>
+                  <h2 className="text-gray-300 text-[16px] lg:text-[20px]">
+                    ({detailsData.vote_count && detailsData.vote_count} voted)
+                  </h2>
+                </div>
+                <div className="circular-progress-wrapper">
+                  <svg className="circular-progress" viewBox="0 0 36 36">
+                    <path
+                      className="circle-bg"
+                      d="M18 2.0845
+         a 15.9155 15.9155 0 0 1 0 31.831
+         a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                    <path
+                      className="circle"
+                      strokeDasharray={`${ratingPercentage}, 100`}
+                      d="M18 2.0845
+         a 15.9155 15.9155 0 0 1 0 31.831
+         a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                    <text x="18" y="20.35" className="percentage-text">
+                      {ratingPercentage}%
+                    </text>
+                  </svg>
+                </div>
+              </div>
+              <div className="w-full flex items-start justify-between mt-9">
+                <div className="flex flex-col items-center gap-y-1">
+                  <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
+                    Length
+                  </h2>
+                  <p className="text-white text-[16px] lg:text-[20px] font-normal">
+                    {formattedRuntime}
+                  </p>
+                </div>
+                <div className="flex flex-col items-center gap-y-1">
+                  <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
+                    Language
+                  </h2>
+                  <p className="text-white text-[16px] lg:text-[20px] font-normal uppercase">
+                    {detailsData.original_language &&
+                      detailsData.original_language}
+                  </p>
+                </div>
+                <div className="flex flex-col items-center gap-y-1">
+                  <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
+                    Country
+                  </h2>
+                  <p className="text-white text-[16px] lg:text-[20px] font-normal">
+                    {detailsData.origin_country &&
+                      detailsData.origin_country[0]}
+                  </p>
+                </div>
+                <div className="flex flex-col items-center gap-y-1">
+                  <h2 className="text-gray-400 font-semibold text-[18px] lg:text-[22px]">
+                    Status
+                  </h2>
+                  <p className="text-white text-[16px] lg:text-[20px] font-normal">
+                    Released
+                  </p>
+                </div>
+              </div>
+              <div className="w-full mt-9 flex flex-col justify-start items-start">
+                <p className=" text-white font-bold text-[18px] lg:text-[22px]">
+                  Genres
+                </p>
+                <div className="w-full flex items-center gap-2 mt-2 flex-wrap">
+                  {detailsData.genres &&
+                    detailsData.genres.map((genre) => (
+                      <div
+                        key={genre.id}
+                        className="w-fit px-2 py-1 bg-white rounded-lg"
+                      >
+                        {genre.name}
+                      </div>
+                    ))}
+                </div>
+                <p className="text-white font-bold mt-9 text-[18px] lg:text-[22px]">
+                  Synopsis
+                </p>
+                <p className="w-full mt-2 text-[16px] lg:text-[20px] text-gray-400">
+                  {detailsData.overview && detailsData.overview}
+                </p>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       <section className="mt-9">
         <div className="w-full flex items-center justify-between">
           <h2 className="text-white font-semibold text-[18px] lg:text-[22px]">
