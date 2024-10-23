@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaWindowClose } from "react-icons/fa";
 
@@ -96,6 +96,12 @@ function TvPage({ setMovieName, setFilmId }) {
 
   const formattedRuntime = `${hours}h ${minutes}m`;
 
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div>
       <div
@@ -106,12 +112,13 @@ function TvPage({ setMovieName, setFilmId }) {
             : { filter: "blur(0px)", transition: "filter 0.3s ease-in-out" }
         }
       >
-        <Link to={"/home"}>
-          <div className="w-full pl-[10px] flex items-center gap-2">
-            <FaArrowLeft className="fill-white" />
-            <p className="text-white ">Go Back</p>
-          </div>
-        </Link>
+        <div
+          className="w-full pl-[10px] flex items-center gap-2"
+          onClick={handleGoBack}
+        >
+          <FaArrowLeft className="fill-white" />
+          <p className="text-white ">Go Back</p>
+        </div>
         <div className="flex flex-col items-center justify-center mt-[30px] md:flex-row md:items-start md:gap-[40px] lg:gap-[100px]">
           <img
             className="w-[85%] max-w-[400px] rounded-[25px] md:w-fit md:max-w-[300px] lg:max-w-[400px]"
