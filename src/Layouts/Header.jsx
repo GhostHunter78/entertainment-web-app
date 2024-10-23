@@ -4,6 +4,7 @@ import IconMovies from "../SVGs/IconMovies";
 import IconSeries from "../SVGs/IconSeries";
 import IconBookmark from "../SVGs/IconBookmark";
 import { Link, useLocation } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const location = useLocation();
@@ -27,9 +28,9 @@ const Header = () => {
           <Link to={"/series-genres"}>
             <IconSeries activePage={currentPage} />
           </Link>
-          <IconBookmark />
+          {/* <IconBookmark /> */}
         </div>
-        <img src="/assets/icons/icon-avatar.png" />
+        <FaUserCircle className="fill-iconGray w-[23px] h-[23px]" />
       </div>
     </>
   );
