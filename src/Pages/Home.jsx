@@ -30,7 +30,7 @@ const Home = ({
         </div>
         <TrendingMovies
           currentPathName={"trending"}
-          currentPage={currentPage}
+          currentPage={1}
           movieOrTv={"movie"}
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
@@ -38,7 +38,7 @@ const Home = ({
         />
         <PopularMovies
           currentPathName={currentPathName}
-          currentPage={currentPage}
+          currentPage={1}
           movieOrTv="movie"
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
@@ -46,7 +46,7 @@ const Home = ({
         />
         <NowPlaying
           currentPathName={"now_playing"}
-          currentPage={currentPage}
+          currentPage={1}
           movieOrTv={"movie"}
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
@@ -54,7 +54,7 @@ const Home = ({
         />
         <Upcoming
           currentPathName={"upcoming"}
-          currentPage={currentPage}
+          currentPage={1}
           movieOrTv={"movie"}
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
@@ -62,7 +62,7 @@ const Home = ({
         />
         <TopRated
           currentPathName={"top_rated"}
-          currentPage={currentPage}
+          currentPage={1}
           movieOrTv={"movie"}
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
@@ -71,14 +71,14 @@ const Home = ({
         <TrendingSeries
           movieOrTv={"tv"}
           currentPathName={"trending"}
-          currentPage={currentPage}
+          currentPage={1}
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
           setMovieName={setMovieName}
         />
         <PopularSeries
           currentPathName={"popular"}
-          currentPage={currentPage}
+          currentPage={1}
           movieOrTv="tv"
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
@@ -87,7 +87,7 @@ const Home = ({
         <AiringToday
           movieOrTv={"tv"}
           currentPathName={"airing_today"}
-          currentPage={currentPage}
+          currentPage={1}
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
           setMovieName={setMovieName}
@@ -95,7 +95,7 @@ const Home = ({
         <OnAir
           movieOrTv={"tv"}
           currentPathName={"on_the_air"}
-          currentPage={currentPage}
+          currentPage={1}
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
           setMovieName={setMovieName}
@@ -103,7 +103,7 @@ const Home = ({
         <TopRatedSeries
           movieOrTv={"tv"}
           currentPathName={"top_rated"}
-          currentPage={currentPage}
+          currentPage={1}
           setMovieOrTv={setMovieOrTv}
           setFilmId={setFilmId}
           setMovieName={setMovieName}
